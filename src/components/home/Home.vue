@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import Painel from '../shared/painel/Painel.vue'
 export default {
 }
 </script>
