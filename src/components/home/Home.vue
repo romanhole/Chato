@@ -13,18 +13,16 @@
         </div>
       </div>
     </nav>
-    <h2>Chato<h2>
-    <div id="animacao">
-      <p>
-        Tá achando o mundo real muito chato?<br>
-        Venha se divertir com seus amigos virtualmente
+    <h2>Chato</h2>
+    <div >
+      <p id="animacao">
       </p>
     </div>
     <button>clique aqui para cadastrar</button>
     <!-- <img> -->
     <section class="contact-section bg-black" id="sobre">
-      <div id="sobre">
-      
+      <div>
+        <p>Chato é um chat online gratuito perfeito para você e seus amigos conversarem virtualmente!</p>
       </div>
     </section>
     <div id="contato">
@@ -35,7 +33,8 @@
 </template>
 
 <script>
-import Painel from '../shared/painel/Painel.vue'
+import typeWriter from './writer'
+window.onload = typeWriter;
 export default {
 }
 </script>
