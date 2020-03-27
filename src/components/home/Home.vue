@@ -1,18 +1,11 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-      <div class="container">
-        
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#sobre">sobre</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <ul class="topnav">
+      <li> <a href="#">Entrar</a> </li>
+      <li> <a href="#">Cadastrar</a> </li>
+      <li> <a href="#sobre">Sobre</a> </li>
+      <li id="logo"> <!-- <img id="imgLogo"> --></li>
+    </ul>
     <h2>Chato</h2>
     <div >
       <p id="animacao">
@@ -40,5 +33,53 @@ export default {
 </script>
 
 <style>
+  body {
+    margin: 0;
+  }
 
+  /* CSS do menu */
+
+  ul.topnav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    top: 0;
+    position: fixed;
+    width: 100%;
+  }
+
+  ul.topnav li {
+    float: right;
+  }
+
+  #logo {
+    float: left;
+  }
+  #imgLogo{
+    width: 46px;
+  }
+
+  ul.topnav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  ul.topnav li a:hover:not(.active) {
+    background-color: #111;
+  }
+
+  ul.topnav li a.active {
+    background-color: #4CAF50;
+  }
+
+  /*@media screen and (max-width: 600px) {
+    ul.topnav li {float: none;}
+  }*/
+
+  /* Fim do CSS do menu */
 </style>
