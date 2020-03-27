@@ -6,22 +6,23 @@
       <li> <a href="#sobre">Sobre</a> </li>
       <li id="logo"> <!-- <img id="imgLogo"> --></li>
     </ul>
-    <h2>Chato</h2>
-    <div >
-      <p id="animacao">
-      </p>
-    </div>
-    <button>clique aqui para cadastrar</button><br><br>
-    <img src="Imagens/Img1.png"> 
-    <section class="contact-section bg-black" id="sobre">
-      <div>
-        <p>Chato é um chat online gratuito perfeito para você e seus amigos conversarem virtualmente!</p>
+    <div id="corpo">
+      <h2>Chato</h2>
+      <div >
+        <p id="animacao">
+        </p>
       </div>
-    </section>
-    <div id="contato">
-      
+      <button>clique aqui para cadastrar</button><br><br>
+      <img src="Imagens/Img1.png"> 
+      <section class="contact-section bg-black" id="sobre">
+        <div>
+          <p>Chato é um chat online gratuito perfeito para você e seus amigos conversarem virtualmente!</p>
+        </div>
+      </section>
+      <div id="contato">
+        
+      </div>
     </div>
-
   </div>
 </template>
 
@@ -82,4 +83,16 @@ export default {
   }*/
 
   /* Fim do CSS do menu */
+  button{
+    border-width: 3px;
+    border-color: black;
+    background-color: white;
+  }
+  #animacao{
+    font-size: 40px;
+  }
+  h2{
+    font-size: 45px;
+    padding-top: 30px;
+  }
 </style>
