@@ -11,8 +11,8 @@
       <p id="animacao">
       </p>
     </div>
-    <button>clique aqui para cadastrar</button>
-    <!-- <img> -->
+    <button>clique aqui para cadastrar</button><br><br>
+    <img src="Imagens/Img1.png"> 
     <section class="contact-section bg-black" id="sobre">
       <div>
         <p>Chato é um chat online gratuito perfeito para você e seus amigos conversarem virtualmente!</p>
