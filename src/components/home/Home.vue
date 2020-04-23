@@ -2,18 +2,18 @@
   <div id="app">
     <ul class="topnav">
       <li> <a href="#">Entrar</a> </li>
-      <li> <a href="#">Cadastrar</a> </li>
+      <li> <a href="../..cadastro/Cadastro.vue">Cadastrar</a> </li>
       <li> <a href="#sobre">Sobre</a> </li>
       <li id="logo"> <!-- <img id="imgLogo"> --></li>
     </ul>
     <div id="corpo">
-      <h2>Chato</h2>
+      <h2>CHATO</h2>
       <div >
         <p id="animacao">
         </p>
       </div>
-      <button>clique aqui para cadastrar</button><br><br>
-      <img src="Imagens/Img1.png"> 
+      <button>Clique aqui para cadastrar</button><br><br>
+      <img src="./Imagens/Img1.png"> 
       <section class="contact-section bg-black" id="sobre">
         <div>
           <p>Chato é um chat online gratuito perfeito para você e seus amigos conversarem virtualmente!</p>
@@ -36,6 +36,9 @@ export default {
 <style>
   body {
     margin: 0;
+    align-content: center;
+    color: #8B0000;
+    background-color: #f0f0f0	;
   }
 
   /* CSS do menu */
@@ -45,7 +48,9 @@ export default {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    color: #f0f0f0;
+    /*background-color: #333;*/
+    background-color: #000000;
     top: 0;
     position: fixed;
     width: 100%;
@@ -71,7 +76,8 @@ export default {
   }
 
   ul.topnav li a:hover:not(.active) {
-    background-color: #111;
+    background-color: #f0f0f0;
+    color: #000000;
   }
 
   ul.topnav li a.active {
@@ -85,14 +91,32 @@ export default {
   /* Fim do CSS do menu */
   button{
     border-width: 3px;
-    border-color: black;
-    background-color: white;
+    color: #8B0000;
+    border-color: #000000;
+    background-color: #f0f0f0;
+    border-radius:4px;
+    cursor:pointer;
+    height: 70px;
+    width: 500px;
+    font-size: 25px;
+  }
+  button:hover{
+    background-color: lightgray;
+    color: #8B0000;
   }
   #animacao{
+    padding-bottom: 50px;
     font-size: 40px;
   }
   h2{
-    font-size: 45px;
-    padding-top: 30px;
+    font-size: 65px;
+    padding-top: 50px;
+  }
+  #corpo{
+    text-align: center;
+  }
+  p{
+    padding-top: 40px;
+    font-size: 25px;
   }
 </style>
