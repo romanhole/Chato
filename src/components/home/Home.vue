@@ -1,8 +1,8 @@
 <template>
-  <div id="app">
+  <div id="topo">
     <ul class="topnav">
       <li> <a href="#">Entrar</a> </li>
-      <li> <a href="../..cadastro/Cadastro.vue">Cadastrar</a> </li>
+      <li> <router-link to="/cadastro">Cadastro</router-link><li>
       <li> <a href="#sobre">Sobre</a> </li>
       <li id="logo"> <!-- <img id="imgLogo"> --></li>
     </ul>
@@ -30,6 +30,7 @@
 import typeWriter from './writer'
 window.onload = typeWriter;
 export default {
+
 }
 </script>
 
