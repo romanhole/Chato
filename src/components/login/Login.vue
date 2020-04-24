@@ -19,7 +19,7 @@
                         <input type="password" placeholder="Senha">
                     </label>
                     <a href="#">Esqueceu sua senha?</a>
-                    <br><button class="btn btn-secundario">Login</button>
+                    <br><button class="btn btn-secundario" @click="<router-link to='/Chat'></router-link>">Login</button>
                 </form>
             </div>
         </div>
