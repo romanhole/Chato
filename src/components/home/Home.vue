@@ -1,7 +1,7 @@
 <template>
   <div id="topo">
     <ul class="topnav">
-      <li> <a href="#">Entrar</a> </li>
+      <li> <router-link to="/Login"></router-link></li>
       <li> <router-link to="/cadastro">Cadastro</router-link><li>
       <li> <a href="#sobre">Sobre</a> </li>
       <li id="logo"> <!-- <img id="imgLogo"> --></li>
