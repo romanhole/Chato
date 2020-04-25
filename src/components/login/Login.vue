@@ -19,7 +19,7 @@
                         <input type="password" placeholder="Senha">
                     </label>
                     <a href="#">Esqueceu sua senha?</a>
-                    <br><button class="btn btn-secundario" @click="<router-link to='/Chat'></router-link>">Login</button>
+                    <br><button class="btn btn-secundario">Login</button>
                 </form>
             </div>
         </div>
@@ -27,9 +27,9 @@
 </template>
 
 <script>
-export default {
-    src="https://kit.fontawesome.com/9f8b65618e.js", crossorigin="anonymous"
-}
+
+    //src="https://kit.fontawesome.com/9f8b65618e.js", crossorigin="anonymous"
+   
 </script>
 
 <style>
