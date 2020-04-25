@@ -33,7 +33,7 @@
 <script>
 export default {
 
-    src="https://kit.fontawesome.com/9f8b65618e.js", crossorigin="anonymous"
+        //src="https://kit.fontawesome.com/9f8b65618e.js", crossorigin="anonymous"
 
 }
 </script>
