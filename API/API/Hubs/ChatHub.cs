@@ -9,7 +9,7 @@ namespace API.Hubs
 {
   public class ChatHub : Hub
   {
-    public async Task EnviarMensagem(Mensagem mensagem) =>
+    public async Task SendMessage(Mensagem mensagem) =>
       await Clients.All.SendAsync("ReceiveMessage", mensagem);
   }
 }
