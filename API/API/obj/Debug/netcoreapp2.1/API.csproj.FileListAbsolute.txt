@@ -37,3 +37,4 @@ C:\Users\Felipe\Desktop\Chato\API\API\obj\Debug\netcoreapp2.1\API.dll
 C:\Users\Felipe\Desktop\Chato\API\API\obj\Debug\netcoreapp2.1\API.pdb
 C:\Users\Felipe\Desktop\Chato\API\API\obj\Debug\netcoreapp2.1\API.genruntimeconfig.cache
 C:\Users\Felipe\Desktop\Chato\API\API\obj\Debug\netcoreapp2.1\API.csproj.CopyComplete
+C:\Users\Felipe\Desktop\Chato\API\API\bin\Debug\netcoreapp2.1\libman.json

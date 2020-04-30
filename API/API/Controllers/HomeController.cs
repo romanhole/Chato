@@ -24,7 +24,7 @@ namespace API.Controllers
         {
       var currentUser = await _userManager.GetUserAsync(User);
       ViewBag.CurrentUserName = currentUser.UserName;
-      var mensagens = await _context.Mensagens.ToListAsync();
+     // var mensagens = await _context.Mensagens.ToListAsync();
             return View();
         }
 
@@ -35,7 +35,7 @@ namespace API.Controllers
         mensagem.NomeUsuario = User.Identity.Name;
         var remetente = await _userManager.GetUserAsync(User);
         mensagem.UserID = remetente.Id;
-        await _context.mensagens.AddSync(mensagem);
+    //    await _context.mensagens.AddSync(mensagem);
         await _context.SaveChangesAsync();
         return Ok();
       }
