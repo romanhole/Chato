@@ -22,5 +22,7 @@ namespace API.Data
         .WithMany(d => d.Mensagens)
         .HasForeignKey(d => d.UserID);
     }
+
+    public DbSet<Mensagem> Mensagens { get; set; }
   }
 }

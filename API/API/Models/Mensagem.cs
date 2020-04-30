@@ -17,5 +17,10 @@ namespace API.Models
     public DateTime Horario { get; set; }
     public string UserID { get; set; }
     public virtual AppUser Remetente { get; set; }
+
+    public Mensagem()
+    {
+      Horario = DateTime.Now;
+    }
   }
 }

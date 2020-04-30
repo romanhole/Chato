@@ -2,7 +2,7 @@ var connection = new signalR.HubConnectionBuilder()
   .withUrl("/home/Index")
   .build();
 
-connection.on("receiveMessage", addMessageToChat);
+connection.on("receiveMessage", adicionarMensagemAoChat);
 
 connection.start().catch(error => {
   console.error(error.message);

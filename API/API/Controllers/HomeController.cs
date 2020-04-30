@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using API.Models;
 using Microsoft.AspNetCore.Identity;
 using API.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
     public readonly ApplicationDbContext _context;
@@ -21,12 +24,15 @@ namespace API.Controllers
       _userManager = userManager;
     }
     public async Task<IActionResult> Index()
-        {
+    {
       var currentUser = await _userManager.GetUserAsync(User);
-      ViewBag.CurrentUserName = currentUser.UserName;
-     // var mensagens = await _context.Mensagens.ToListAsync();
-            return View();
-        }
+      if (User.Identity.IsAuthenticated)
+      {
+        ViewBag.CurrentUserName = currentUser.UserName;
+      }
+      var mensagens = await _context.Mensagens.ToListAsync();
+      return View(mensagens);
+    }
 
     public async Task<IActionResult> Create(Mensagem mensagem)
     {
@@ -35,7 +41,7 @@ namespace API.Controllers
         mensagem.NomeUsuario = User.Identity.Name;
         var remetente = await _userManager.GetUserAsync(User);
         mensagem.UserID = remetente.Id;
-    //    await _context.mensagens.AddSync(mensagem);
+        await _context.Mensagens.AddAsync(mensagem);
         await _context.SaveChangesAsync();
         return Ok();
       }
