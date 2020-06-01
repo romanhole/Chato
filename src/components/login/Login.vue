@@ -1,25 +1,25 @@
 <template>
-    <div class="container">
-        <div class="conteudo">
-            <div class="primeira-coluna">
-                <h2 class="title title-primario">Olá, Amigo</h2>
-                <p class="descricao">Insira seus dados pessoais</p>
-                <p class="descricao">e cadastre-se no Chato!</p>
-                <button class="btn btn-primario">Cadastre-se</button>
+    <div class="container2">
+        <div class="conteudo2">
+            <div class="primeiracoluna">
+                <h2 class="titulo titulo-primario">Olá, Amigo</h2>
+                <p class="description">Insira seus dados pessoais</p>
+                <p class="description">e cadastre-se no Chato!</p>
+                <button class="botao botao-primario">Cadastre-se</button>
             </div>
-            <div class="segunda-coluna">
-                <h2 class="title title-secundario">Faça login no Chato!</h2>
+            <div class="segundacoluna">
+                <h2 class="titulo titulo-secundario">Faça login no Chato!</h2>
                 <form class="form">
-                    <label class="label-input" for="">
+                    <label class="labelinput" for="">
                         <i class="fas fa-envelope icon-modify"></i>
                         <input type="email" placeholder="Email">
                     </label>
-                    <label class="label-input" for="">
+                    <label class="labelinput" for="">
                         <i class="fas fa-lock icon-modify"></i>
                         <input type="password" placeholder="Senha">
                     </label>
                     <a href="#">Esqueceu sua senha?</a>
-                    <br><button class="btn btn-secundario">Login</button>
+                    <br><button class="botao botao-secundario">Login</button>
                 </form>
             </div>
         </div>
@@ -42,7 +42,7 @@
 body{
     font-family: 'Open Sans', sans-serif;
 }
-.conteudo{
+.conteudo2{
     border-radius: 15px;
     background-color: white;
     width: 960px;
@@ -52,7 +52,7 @@ body{
     align-items: center;
     position: relative;
 }
-.conteudo::before{
+.conteudo2::before{
     content: "";
     position: absolute;
     background-color: #8B0000;
@@ -62,31 +62,31 @@ body{
     border-bottom-right-radius: 15px;
     left: 60%;
 }
-.container{
+.container2{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     background-color: #f0f0f0;
 }
-.title{
+.titulo{
     font-size: 30px;
     font-weight: bold;
 }
-.title-primario{
+.titulo-primario{
     color: white;
 }
-.title-secundario{
+.titulo-secundario{
     color:#8B0000;
     height: 80px;
 }
-.descricao{
+.description{
     font-size: 14px;
     font-weight: 300;
     color: white;
     line-height: 30px;
 }
-.btn{
+.botao{
     border-radius: 15px;
     text-transform: uppercase;
     color: white;
@@ -98,29 +98,29 @@ body{
     border: none;
     height: 35px;
 }
-.btn-primario{
+.botao-primario{
     background-color: transparent;
     border: 1px solid white;
 }
-.btn-primario:hover{
+.botao-primario:hover{
     background-color: white;
     color: #8B0000;
 }
-.btn-secundario{
+.botao-secundario{
     background-color: #8B0000;
 }
-.btn-secundario:hover{
+.botao-secundario:hover{
     background-color: white;
     color: #8B0000;
     border: 1px solid #8B0000;
 }
-.primeira-coluna{
+.primeiracoluna{
     text-align: center;
     flex: 1.5 0 auto;
     z-index: 10;
     order: 2;
 }
-.segunda-coluna{
+.segundacoluna{
     flex: 2 0 auto;
     display: flex;
     flex-direction: column;
@@ -138,7 +138,7 @@ body{
     border: none;
     background-color: #ecf0f1;
 }
-.label-input{
+.labelinput{
     background-color: #ecf0f1;
     display: flex;
     align-items: center;
