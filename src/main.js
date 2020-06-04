@@ -3,6 +3,7 @@ import App from './App.vue'
 import VueResource from 'vue-resource'
 import VueRouter from 'vue-router'
 import { routes } from './router'
+import './assets/style.css'
 
 Vue.use(VueResource);
 Vue.use(VueRouter);
