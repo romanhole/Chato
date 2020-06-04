@@ -35,12 +35,13 @@ export default {
 }
 </script>
 
-<style>
-  body {
-    margin: 0;
+<style scoped>
+  #topo {
     align-content: center;
     color: #8B0000;
     background-color: #f0f0f0	;
+    height: 100%;
+    width: 100%;
   }
 
   /* CSS do menu */
