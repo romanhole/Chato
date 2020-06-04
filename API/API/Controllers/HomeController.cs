@@ -1,76 +1,115 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using API.Models;
-using Microsoft.AspNetCore.Identity;
-using API.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization;
+using API.Data;
+using API.Models;
+using System;
 
 namespace API.Controllers
 {
-    [Authorize]
+    [Route("api/[controller]")]
+    [ApiController]
     public class HomeController : Controller
     {
-    public readonly ApplicationDbContext _context;
-    public readonly UserManager<AppUser> _userManager;
-
-    public HomeController(ApplicationDbContext context, UserManager<AppUser> userManager)
-    {
-      _context = context;
-      _userManager = userManager;
-    }
-    public async Task<IActionResult> Index()
-    {
-      var currentUser = await _userManager.GetUserAsync(User);
-      if (User.Identity.IsAuthenticated)
-      {
-        ViewBag.CurrentUserName = currentUser.UserName;
-      }
-      var mensagens = await _context.Mensagens.ToListAsync();
-      return View(mensagens);
-    }
-
-    public async Task<IActionResult> Create(Mensagem mensagem)
-    {
-      if(ModelState.IsValid)
-      {
-        mensagem.NomeUsuario = User.Identity.Name;
-        var remetente = await _userManager.GetUserAsync(User);
-        mensagem.UserID = remetente.Id;
-        await _context.Mensagens.AddAsync(mensagem);
-        await _context.SaveChangesAsync();
-        return Ok();
-      }
-      return Error();
-    }
-
-        public IActionResult About()
+        private readonly AppDbContext _context;
+        public HomeController(AppDbContext context)
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
+            _context = context;
         }
 
-        public IActionResult Contact()
+        [HttpGet("{idConversa}")]
+        public ActionResult<List<ConversaMensagem>> GetAll(int idConversa)
         {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
+            try
+            {
+                return Ok(_context.ConversaMensagem
+                            .Where(o => o.idConversa == idConversa)
+                            .OrderBy(o => o.dataEnvio)
+                            .ToList());
+            }
+            catch (Exception e) { return NotFound(e.Message); }
         }
 
-        public IActionResult Privacy()
+
+        [HttpGet("{idConversa}/{ultimaData}")]
+        public ActionResult<List<ConversaMensagem>> Get(int idConversa, DateTime ultimaData)
         {
-            return View();
+            try
+            {
+                var result =  _context.ConversaMensagem
+                    .Where(o => o.idConversa == idConversa && o.dataEnvio.CompareTo(ultimaData) > 0)
+                    .OrderBy(o => o.dataEnvio)
+                    .ToList();
+
+                return Ok(result);
+            }
+            catch
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, "Falha no acesso ao banco de dados");
+            }
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+         
+        [HttpPost]
+        public ActionResult post([FromBody]ConversaMensagem model)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            try
+            {
+                _context.ConversaMensagem.Add(model);
+                _context.SaveChanges();
+                return Ok(model);
+            }
+            catch
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, "Falha no acesso ao banco de dados.");
+            }
+            return BadRequest();
         }
+
+        [HttpPut("{idConversaMensagem}")]
+        public async Task<IActionResult> put(int idConversaMensagem, ConversaMensagem model)
+        {
+            try
+            {
+                var result = await _context.ConversaMensagem.FindAsync(idConversaMensagem);
+                if (idConversaMensagem != result.idConversaMensagem) { return BadRequest(); }
+                result.idConversaMensagem = model.idConversaMensagem;
+                result.idUsuario = model.idUsuario;
+                result.idConversa = model.idConversa;
+                result.Mensagem = model.Mensagem;
+                result.dataEnvio = model.dataEnvio;
+
+                await _context.SaveChangesAsync();
+                return NoContent();
+            }
+            catch
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, "Falha no acesso ao banco de dados.");
+            }
+        }
+
+        [HttpDelete("{idConversaMensagem}")]
+        public async Task<IActionResult> delete(int idConversaMensagem)
+        {
+            try
+            {
+                var mensagem = await _context.ConversaMensagem.FindAsync(idConversaMensagem);
+
+                if (mensagem == null) { return NotFound(); }
+
+                _context.Remove(mensagem);
+                await _context.SaveChangesAsync();
+
+                return NoContent();
+            }
+            catch
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, "Falha no acesso ao banco de dados.");
+            }
+        }
+        
     }
 }
