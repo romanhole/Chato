@@ -32,15 +32,12 @@
    
 </script>
 
-<style>
+<style scoped>
     @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-body{
-    font-family: 'Open Sans', sans-serif;
 }
 .conteudo2{
     border-radius: 15px;
@@ -68,6 +65,7 @@ body{
     align-items: center;
     height: 100vh;
     background-color: #f0f0f0;
+    font-family: 'Open Sans', sans-serif;
 }
 .titulo{
     font-size: 30px;
