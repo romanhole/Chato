@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using API.Data;
 using API.Models;
 using System;
+using System.Reflection.Metadata.Ecma335;
 
 namespace API.Controllers
 {
@@ -31,8 +32,7 @@ namespace API.Controllers
                             .ToList());
             }
             catch (Exception e) { return NotFound(e.Message); }
-        }
-
+        }        
 
         [HttpGet("{idConversa}/{ultimaData}")]
         public ActionResult<List<ConversaMensagem>> Get(int idConversa, DateTime ultimaData)
@@ -65,9 +65,24 @@ namespace API.Controllers
             catch
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError, "Falha no acesso ao banco de dados.");
-            }
-            return BadRequest();
+            }            
         }
+
+        [HttpPost]
+        public ActionResult post([FromBody] Usuario model)
+        {
+          try
+          {
+              _context.Usuario.Add(model);
+              _context.SaveChanges();
+              return Ok(model);
+          }
+          catch
+          {
+            return this.StatusCode(StatusCodes.Status500InternalServerError, "Falha no acesso ao banco de dados.");
+          }
+        }
+    
 
         [HttpPut("{idConversaMensagem}")]
         public async Task<IActionResult> put(int idConversaMensagem, ConversaMensagem model)

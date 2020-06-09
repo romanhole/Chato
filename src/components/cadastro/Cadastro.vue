@@ -70,21 +70,27 @@ export default {
     };
   },
   methods: {
-    handleSubmit(e) {
+    async handleSubmit(e) {
       e.preventDefault();
       if (this.senha === this.confirmacaoSenha && this.senha.length > 0) {
-        /*
-                 let url = "http://localhost:8080/cadastro"
-                this.$http.post(url, {
-                    nome: this.nome,
-                    email: this.email,
-                    senha: this.senha
-                })
+        try {
+          let url = "http://localhost:55707";
+          const response = await axios.get(url);
+
+          /*
                 .then(response => {
                   localStorage.setItem('user', JSON.stringify(response.data.user))
-                })
-
-              */
+                })*/
+          alert(response);
+        } catch (erro) {
+          console.log(erro);
+        }
+        axios.post(url, {
+          nome: this.nome,
+          email: this.email,
+          senha: this.senha
+        });
+        alert("a");
       } else {
         this.senha = "";
         this.confirmacaoSenha = "";
