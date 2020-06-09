@@ -9,25 +9,78 @@
               </div>
           </div>
           <div>
-              <img src="../../assets/meuperfil.jpg"/>
-          </div>
+            <div>
+                <label for="select-file">
+                    <div :class="{'alterar-imagem' : url == ''}">
+                        <p>ADICIONAR NOVA IMAGEM DE PERFIL</p>
+                    </div>
+                    <img :src="url" v-if="url != ''"/>
+                </label>
+                <input type="file" id="select-file" @change="onFileChange" style="display : none" />
+            </div>
+           </div>
           <div>
               <p>Nome</p>
               <div>
-                <p>Rafael Romanhole</p>
-                <button><font-awesome-icon :icon="['fas', 'edit']" /></button>
+                <input type="text" :disabled = alterarEstado :class="{'alterar-nome' : alterarNome}" v-model="nome">
+                <button @click="changeName"><font-awesome-icon :icon="['fas', 'edit']" v-if="alterarEstado"/><font-awesome-icon :icon="['fas', 'check']" v-else/></button>
                </div>
+          </div>
+          <div>
+              <p>Seu ID:</p>
+              <p>12312</p>
           </div>
           <div>
               <p>Sair</p>
               <button><font-awesome-icon :icon="['fas', 'sign-out-alt']" /></button>
           </div>
       </div>
+      <div class="item article-002" :class="{'amigo-aberto' : abaAmigo}">
+          <div>
+              <div>
+                <button @click="addAmigo"><font-awesome-icon :icon="['fas', 'arrow-left']" /></button>
+                <p>Perfil</p>
+              </div>
+          </div>
+          <div>
+                <p>Coloque o Id de seu novo amigo</p>
+                <input type="text"/>
+                <button><font-awesome-icon :icon="['fas', 'check']" /></button>
+          </div>
+      </div>
+      <div class="item article-003" :class="{'grupo-aberto' : abaGrupo}">
+          <div>
+              <div>
+                <button @click="criarGrupo"><font-awesome-icon :icon="['fas', 'arrow-left']" /></button>
+                <p>Novo grupo</p>
+              </div>
+          </div>
+          <div>
+              <div>
+                <label for="select-file2">
+                    <div :class="{'alterar-imagem2' : url2 == ''}">
+                        <p>ADICIONAR IMAGEM DO GRUPO</p>
+                    </div>
+                    <img :src="url2" v-if="url2 != ''"/>
+                </label>
+                <input type="file" id="select-file2" @change="onFileChange2" style="display : none" />
+            </div>
+          </div>
+          <div>
+              <input type="text" placeholder="Nome do grupo">
+          </div>
+          <div>
+              <button><font-awesome-icon :icon="['fas', 'check']" /></button>
+          </div>
+      </div>
       <div class="item article-01">
           <div class="left">
               <div class="left-01">
                   <img src="../../assets/meuperfil.jpg" @click="trocar"/>
-
+                  <div>
+                    <button @click="addAmigo"><font-awesome-icon :icon="['fas', 'user-plus']"/></button>
+                    <button @click="criarGrupo"><font-awesome-icon :icon="['fas', 'comment-alt']" /></button>
+                  </div>
               </div>
               <div class="left-02">
                   <input type="text" id="procurar" placeholder="Procurar por conversas">
@@ -88,9 +141,9 @@
                 </div>
               </div>
               <div class="right-03" @click="dadosGrupo">
-                    <img src="https://web.whatsapp.com/pp?e=https%3A%2F%2Fpps.whatsapp.net%2Fv%2Ft61.24694-24%2F75518813_135672844467532_4825498981546307180_n.jpg%3Foe%3D5EDEBAE7%26oh%3D7d719f1952dc7d8b1ecc1b71bea6c04c&t=l&u=5519987277158-1583320513%40g.us&i=1583320610&n=wKIscaInsu%2FhaxUDSCy%2FIX%2Fx7uoIm3SX6Pw0xlkvBkA%3D"/>
+                    <img :src= "url3"/>
                     <div>
-                        <p>chat de pratica</p>
+                        <p>{{nomeGrupo}}</p>
                         <p>João, Marcelao, Pires, Você</p>
                     </div>
               </div>
@@ -103,11 +156,19 @@
           </div>
           <div>
             <div>
-                <img src="https://web.whatsapp.com/pp?e=https%3A%2F%2Fpps.whatsapp.net%2Fv%2Ft61.24694-24%2F75518813_135672844467532_4825498981546307180_n.jpg%3Foe%3D5EDEBAE7%26oh%3D7d719f1952dc7d8b1ecc1b71bea6c04c&t=l&u=5519987277158-1583320513%40g.us&i=1583320610&n=wKIscaInsu%2FhaxUDSCy%2FIX%2Fx7uoIm3SX6Pw0xlkvBkA%3D"/>
+                <div>
+                <label for="select-file3">
+                    <div :class="{'alterar-imagem3' : url3 == ''}">
+                        <p>ADICIONAR NOVA IMAGEM AO GRUPO</p>
+                    </div>
+                    <img :src="url3" v-if="url3 != ''"/>
+                </label>
+                <input type="file" id="select-file3" @change="onFileChange3" style="display : none" />
+            </div>
             </div>
             <div>
-                <p>chat pratica</p>
-                <button><font-awesome-icon :icon="['fas', 'edit']" /></button>
+                <input type="text" :disabled = alterarEstado2 :class="{'alterar-nome2' : alterarNome2}" v-model="nomeGrupo">
+                <button @click="changeName2"><font-awesome-icon :icon="['fas', 'edit']" v-if="alterarEstado2"/><font-awesome-icon :icon="['fas', 'check']" v-else/></button>
             </div>
             <div>
                 <div>
@@ -166,7 +227,17 @@ export default {
             messages:[],
             selecionado: false,
             abaPerfil: false,
-            abaDados: false
+            abaDados: false,
+            abaGrupo: false,
+            alterarNome: false,
+            alterarEstado: true,
+            alterarEstado2:true,
+            nome: "Rafael Romanhole",
+            nomeGrupo: "chat de pratica",
+            abaAmigo: false,
+            url: "",
+            url2: "",
+            url3: ""
         }
     },
     methods:{
@@ -178,6 +249,32 @@ export default {
         },
         dadosGrupo(){
             this.abaDados = !this.abaDados;
+        },
+        criarGrupo(){
+            this.abaGrupo = !this.abaGrupo;
+        },
+        changeName(){
+            this.alterarNome = !this.alterarNome;
+            this.alterarEstado = !this.alterarEstado;
+        },
+        changeName2(){
+            this.alterarNome2 = !this.alterarNome2;
+            this.alterarEstado2 = !this.alterarEstado2;
+        },
+        addAmigo(){
+            this.abaAmigo = !this.abaAmigo;
+        },
+        onFileChange(e) {
+            const file = e.target.files[0];
+            this.url = URL.createObjectURL(file);
+        },
+        onFileChange2(e) {
+            const file2 = e.target.files[0];
+            this.url2 = URL.createObjectURL(file2);
+        },
+        onFileChange3(e) {
+            const file3 = e.target.files[0];
+            this.url3 = URL.createObjectURL(file3);
         }
     }
 }
@@ -303,21 +400,63 @@ function atualizar(){
     display: flex;
     align-items: center;
     justify-content: center;
-}
-.article-00>div:nth-child(2)>img{
-    width: 190px;
-    height: 190px;
-    border-radius: 50%;
-    cursor: pointer;
     opacity: 0;
     visibility: hidden;
     transition: opacity .4s;
 }
-.perfil-aberto>div:nth-child(2)>img{
+.perfil-aberto>div:nth-child(2){
     visibility: visible;
     opacity: 1;
     -webkit-animation: fade .4s;
     animation: fade .4s;
+}
+.article-00>div:nth-child(2)>div{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.article-00>div:nth-child(2)>div>label{
+    width: 100%;
+    height: 100%;
+    max-width: 190px;
+    max-height: 190px;
+    border-radius: 50%;
+    cursor: pointer;
+    background: lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.article-00>div:nth-child(2)>div>label>div{
+    visibility: hidden;
+    width: 100%;
+    height: 100%;
+    font-size: 13px;
+    text-align: center;
+    position: absolute;
+    z-index: 99;
+    background-color: rgba(173, 173, 173, 0.603);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.article-00>div:nth-child(2)>div>label:hover>div{
+    visibility: visible;
+}
+.alterar-imagem{
+    visibility: visible;
+}
+.article-00>div:nth-child(2)>div>label>img{
+    z-index: 9;
+    width: 100%;
+    height: 100%;
+    max-width: 190px;
+    max-height: 190px;
+    border-radius: 50%;
 }
 .article-00>div:nth-child(3){
     height: 100px;
@@ -349,6 +488,16 @@ function atualizar(){
     font-size: 20px;
     outline: none;
 }
+.article-00>div:nth-child(3)>div>input{
+    border: none;
+    background-color: transparent;
+    outline: none;
+    font-size: 15px;
+    width: 100%;
+}
+.alterar-nome{
+    border-bottom: 1px solid black !important;
+}
 .article-00>div:nth-child(3)>p{
     visibility: hidden;
     opacity: 0;
@@ -368,14 +517,10 @@ function atualizar(){
     height: 100px;
     background-color: lightgrey;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     border-bottom: 1px solid black;
-    align-items: center;
     margin-top: 50px;
-    cursor: pointer;
-}
-.article-00>div:nth-child(4):hover{
-    background-color: rgb(148, 148, 148);
 }
 .perfil-aberto>div:nth-child(4){
     padding: 20px;
@@ -391,7 +536,41 @@ function atualizar(){
     -webkit-animation: fade .4s;
     animation: fade .4s;
 }
-.article-00>div:nth-child(4)>button{
+.article-00>div:nth-child(4)>p:nth-child(1){
+    color: red;
+    font-size: 15px;
+}
+.article-00>div:nth-child(4)>p:nth-child(2){
+    font-size: 15px;
+}
+.article-00>div:nth-child(5){
+    height: 100px;
+    background-color: lightgrey;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    align-items: center;
+    margin-top: 50px;
+    cursor: pointer;
+}
+.article-00>div:nth-child(5):hover{
+    background-color: rgb(148, 148, 148);
+}
+.perfil-aberto>div:nth-child(5){
+    padding: 20px;
+}
+.article-00>div:nth-child(5)>p{
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .4s;
+}
+.perfil-aberto>div:nth-child(5)>p{
+    visibility: visible;
+    opacity: 1;
+    -webkit-animation: fade .4s;
+    animation: fade .4s;
+}
+.article-00>div:nth-child(5)>button{
     visibility: hidden;
     opacity: 0;
     transition: opacity .4s;
@@ -401,11 +580,299 @@ function atualizar(){
     cursor: pointer;
     font-size: 20px;
 }
-.perfil-aberto>div:nth-child(4)>button{
+.perfil-aberto>div:nth-child(5)>button{
     visibility: visible;
     opacity: 1;
     -webkit-animation: fade .4s;
     animation: fade .4s;
+}
+.article-002{
+    position: absolute;
+    display: flex;
+    width: 0;
+    height: 100%;
+    background-color: #8B0000;
+    flex-direction: column;
+    z-index: 99;
+    transition: all .4s;
+    visibility: hidden;
+}
+.amigo-aberto{
+    visibility: visible;
+    width: 25%;
+}
+.article-002>div:nth-child(1){
+    background-color: red;
+    height: 130px;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    border-bottom: 1px solid black;
+    margin-bottom: 25px;
+}
+.article-002>div:nth-child(1)>div{
+    display: flex;
+    align-items: flex-end;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .4s;
+}
+.amigo-aberto>div:nth-child(1)>div{
+    padding: 20px;
+    visibility: visible;
+    opacity: 1;
+    -webkit-animation: fade .4s;
+    animation: fade .4s;
+}
+.article-002>div:nth-child(1)>div>button{
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 19px;
+    margin-right: 20px;
+    outline: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .4s;
+}
+.amigo-aberto>div:nth-child(1)>div>button{
+    visibility: visible;
+    opacity: 1;
+    -webkit-animation: fade .4s;
+    animation: fade .4s;
+}
+.article-002>div:nth-child(1)>div>p{
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .4s;
+    color: white;
+    font-family:"Segoe UI";
+    font-feature-settings: "kern";
+    font-size: 19px;
+    font-stretch: 100%;
+    font-weight: 500;
+}
+.amigo-aberto>div:nth-child(1)>div>p{
+    visibility: visible;
+    opacity: 1;
+    -webkit-animation: fade .4s;
+    animation: fade .4s;
+}
+.article-002>div:nth-child(2){
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .4s;
+}
+.amigo-aberto>div:nth-child(2){
+    visibility: visible;
+    opacity: 1;
+    -webkit-animation: fade .4s;
+    animation: fade .4s;
+}
+.article-002>div:nth-child(2)>input{
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: transparent;
+    outline: transparent;
+    width: 80%;
+    color: white;
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 15px;
+}
+.article-002>div:nth-child(2)>p{
+    color: white;
+    margin-bottom: 25px;
+}
+.article-002>div:nth-child(2)>button{
+    background-color: lightgray;
+    border: none;
+    outline: none;
+    font-size: 25px;
+    border-radius: 50%;
+    height: 45px;
+    width: 45px;
+    cursor: pointer;
+}
+.article-003{
+    position: absolute;
+    display: flex;
+    width: 0;
+    height: 100%;
+    background-color: #8B0000;
+    flex-direction: column;
+    z-index: 99;
+    transition: all .4s;
+    visibility: hidden;
+}
+.grupo-aberto{
+    width: 25%;
+    visibility: visible;
+}
+.article-003>div:nth-child(1){
+    background-color: red;
+    height: 130px;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    border-bottom: 1px solid black;
+}
+.article-003>div:nth-child(1)>div{
+    padding: 20px;
+    display: flex;
+    align-items: flex-end;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .4s;
+}
+.grupo-aberto>div:nth-child(1)>div{
+    visibility: visible;
+    opacity: 1;
+    -webkit-animation: fade .4s;
+    animation: fade .4s;
+}
+.grupo-aberto>div:nth-child(1)>div>button{
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 19px;
+    margin-right: 20px;
+    outline: none;
+}
+.article-003>div:nth-child(1)>div>p{
+    color: white;
+    font-family:"Segoe UI";
+    font-feature-settings: "kern";
+    font-size: 19px;
+    font-stretch: 100%;
+    font-weight: 500;
+}
+.article-003>div:nth-child(2){
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .4s;
+}
+.grupo-aberto>div:nth-child(2){
+    visibility: visible;
+    opacity: 1;
+    -webkit-animation: fade .4s;
+    animation: fade .4s;
+}
+.article-003>div:nth-child(2)>div{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.article-003>div:nth-child(2)>div>label{
+    width: 100%;
+    height: 100%;
+    max-width: 190px;
+    max-height: 190px;
+    border-radius: 50%;
+    cursor: pointer;
+    background: lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.article-003>div:nth-child(2)>div>label>div{
+    visibility: hidden;
+    width: 100%;
+    height: 100%;
+    font-size: 13px;
+    text-align: center;
+    position: absolute;
+    z-index: 99;
+    background-color: rgba(173, 173, 173, 0.603);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.article-003>div:nth-child(2)>div>label:hover>div{
+    visibility: visible;
+}
+.alterar-imagem2{
+    visibility: visible;
+}
+.article-003>div:nth-child(2)>div>label>img{
+    z-index: 9;
+    width: 100%;
+    height: 100%;
+    max-width: 190px;
+    max-height: 190px;
+    border-radius: 50%;
+}
+.article-003>div:nth-child(3){
+    display: flex;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .4s;
+    justify-content: flex-end;
+}
+.grupo-aberto>div:nth-child(3){
+    visibility: visible;
+    opacity: 1;
+    -webkit-animation: fade .4s;
+    animation: fade .4s;
+}
+.article-003>div:nth-child(3)>input{
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    width: 90%;
+    color: white;
+    font-size: 15px;
+}
+.article-003>div:nth-child(3)>input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgba(255, 255, 255, 0.644);
+  opacity: 1; /* Firefox */
+}
+
+.article-003>div:nth-child(3)>input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: rgba(255, 255, 255, 0.644);
+}
+
+.article-003>div:nth-child(3)>input::-ms-input-placeholder { /* Microsoft Edge */
+  color: rgba(255, 255, 255, 0.644);
+}
+.article-003>div:nth-child(4){
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 130px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .4s;
+}
+.grupo-aberto>div:nth-child(4){
+    visibility: visible;
+    opacity: 1;
+    -webkit-animation: fade .4s;
+    animation: fade .4s;
+}
+.article-003>div:nth-child(4)>button{
+    background-color: lightgray;
+    border: none;
+    outline: none;
+    font-size: 25px;
+    border-radius: 50%;
+    height: 45px;
+    width: 45px;
+    cursor: pointer;
 }
 .article-01{
     width: 25%;
@@ -478,25 +945,68 @@ function atualizar(){
     height: 680px;
 }
 .article-03>div:nth-child(2)>div:nth-child(1){
-    display: flex;
-    flex-direction: column;
+    height: 250px;
     background-color: rgb(158, 0, 0);
+    display: flex;
     align-items: center;
-    padding: 20px;
 }
-.article-03>div:nth-child(2)>div:nth-child(1)>img{
-    width: 190px;
-    height: 190px;
-    border-radius: 50%;
+.article-03>div:nth-child(2)>div:nth-child(1)>div{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-content: center;
     opacity: 0;
     visibility: hidden;
-    transition: opacity .5s;
+    transition: opacity .4s;
 }
-.dadosAberto>div:nth-child(2)>div:nth-child(1)>img{
+.dadosAberto>div:nth-child(2)>div:nth-child(1)>div{
     visibility: visible;
     opacity: 1;
-    -webkit-animation: fade .5s;
-    animation: fade .5s;
+    -webkit-animation: fade .4s;
+    animation: fade .4s;
+}
+.article-03>div:nth-child(2)>div:nth-child(1)>div>label{
+    width: 100%;
+    height: 100%;
+    max-width: 190px;
+    max-height: 190px;
+    border-radius: 50%;
+    cursor: pointer;
+    background: lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.article-03>div:nth-child(2)>div:nth-child(1)>div>label>div{
+    visibility: hidden;
+    width: 100%;
+    height: 100%;
+    font-size: 13px;
+    text-align: center;
+    position: absolute;
+    z-index: 99;
+    background-color: rgba(173, 173, 173, 0.603);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.article-03>div:nth-child(2)>div:nth-child(1)>div>label:hover>div{
+    visibility: visible;
+}
+.alterar-imagem3{
+    visibility: visible;
+}
+.article-03>div:nth-child(2)>div:nth-child(1)>div>label>img{
+    z-index: 9;
+    width: 100%;
+    height: 100%;
+    max-width: 190px;
+    max-height: 190px;
+    border-radius: 50%;
 }
 .article-03>div:nth-child(2)>div:nth-child(2){
     display: flex;
@@ -507,32 +1017,42 @@ function atualizar(){
     font-size: 20px;
     margin-bottom: 12px;
 }
-.article-03>div:nth-child(2)>div:nth-child(2)>p{
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity .5s;
-}
-.dadosAberto>div:nth-child(2)>div:nth-child(2)>p{
-    visibility: visible;
-    opacity: 1;
-    -webkit-animation: fade .5s;
-    animation: fade .5s;
-}
 .article-03>div:nth-child(2)>div:nth-child(2)>button{
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity .5s;
     background-color: transparent;
     border: none;
     font-size: 20px;
     outline: none;
     color: white;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .5s;
 }
 .dadosAberto>div:nth-child(2)>div:nth-child(2)>button{
     visibility: visible;
     opacity: 1;
     -webkit-animation: fade .5s;
     animation: fade .5s;
+}
+.article-03>div:nth-child(2)>div:nth-child(2)>input{
+    border: none;
+    background-color: transparent;
+    outline: none;
+    font-size: 15px;
+    width: 100%;
+    color: white;
+    font-size: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .5s;
+}
+.dadosAberto>div:nth-child(2)>div:nth-child(2)>input{
+    visibility: visible;
+    opacity: 1;
+    -webkit-animation: fade .5s;
+    animation: fade .5s;
+}
+.alterar-nome2{
+    border-bottom: 1px solid black !important;
 }
 .article-03>div:nth-child(2)>div:nth-child(3){
     background-color: rgb(158, 0, 0);
@@ -692,12 +1212,26 @@ function atualizar(){
     display: flex;
     align-items: center;
     padding: 15px;
+    justify-content: space-between;
 }
 .left-01>img{
     width: 40px;
     height: 40px;
     border-radius: 50%;
     margin-right: 15px;
+    cursor: pointer;
+}
+.left-01>div{
+    display: flex;
+    padding: 10px;
+}
+.left-01>div>button{
+    margin-left: 20px;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: white;
+    font-size: 20px;
     cursor: pointer;
 }
 .left-02{
