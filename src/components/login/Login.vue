@@ -53,9 +53,34 @@ export default {
     };
   },
   methods: {
-    handleSubmit(e) {
+    async handleSubmit(e) {
+      let self = this;
       e.preventDefault();
       if (this.senha.length > 0) {
+        try {
+          let url = "http://localhost:55707/api/home/login/" + this.email;
+          const response = await this.$http.get(url);
+
+          if (response == null) {
+            self.router.push("/login");
+            alert("null");
+          }
+
+          response.forEach(function(item) {
+            if (senha == item.senha) {
+              self.router.router.push("/chat");
+              localStorage.setItem("idUsuario", item.idUsuario);
+              alert("foi");
+            } else {
+              self.router.push("/login");
+              alert("nao foi");
+            }
+          });
+        } catch (erro) {
+          console.log(erro);
+        }
+      } else {
+        return alert("Insira uma senha!");
       }
     }
   }

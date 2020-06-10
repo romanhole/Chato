@@ -71,12 +71,10 @@ export default {
   },
   methods: {
     async handleSubmit(e) {
-      alert("a");
-
       e.preventDefault();
       if (this.senha === this.confirmacaoSenha && this.senha.length > 0) {
         try {
-          alert("a");
+          let self = this;
           let url = "http://localhost:55707/api/home/cadastro";
           const response = await this.$http.post(url, {
             nome: this.nome,
@@ -84,15 +82,14 @@ export default {
             senha: this.senha
           });
           localStorage.setItem("user", JSON.stringify(response.data.user));
-
-          alert(response);
+          alert("Cadastro realizado com sucesso!");
+          self.router.push("/login");
         } catch (erro) {
           console.log(erro);
         }
       } else {
         this.senha = "";
         this.confirmacaoSenha = "";
-
         return alert("Senhas incompatíveis.");
       }
     }
