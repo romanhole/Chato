@@ -71,26 +71,24 @@ export default {
   },
   methods: {
     async handleSubmit(e) {
+      alert("a");
+
       e.preventDefault();
       if (this.senha === this.confirmacaoSenha && this.senha.length > 0) {
         try {
-          let url = "http://localhost:55707";
-          const response = await axios.get(url);
+          alert("a");
+          let url = "http://localhost:55707/api/home/cadastro";
+          const response = await this.$http.post(url, {
+            nome: this.nome,
+            email: this.email,
+            senha: this.senha
+          });
+          localStorage.setItem("user", JSON.stringify(response.data.user));
 
-          /*
-                .then(response => {
-                  localStorage.setItem('user', JSON.stringify(response.data.user))
-                })*/
           alert(response);
         } catch (erro) {
           console.log(erro);
         }
-        axios.post(url, {
-          nome: this.nome,
-          email: this.email,
-          senha: this.senha
-        });
-        alert("a");
       } else {
         this.senha = "";
         this.confirmacaoSenha = "";

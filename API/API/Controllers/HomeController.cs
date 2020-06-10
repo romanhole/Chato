@@ -8,11 +8,13 @@ using API.Data;
 using API.Models;
 using System;
 using System.Reflection.Metadata.Ecma335;
+using Microsoft.AspNetCore.Cors;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("myPolicy")]
     public class HomeController : Controller
     {
         private readonly AppDbContext _context;
@@ -32,7 +34,19 @@ namespace API.Controllers
                             .ToList());
             }
             catch (Exception e) { return NotFound(e.Message); }
-        }        
+        }
+
+        [HttpGet]
+        public ActionResult<List<Usuario>> GetAll()
+        {
+          try
+          {
+            return Ok(_context.Usuario
+            .OrderBy(o => o.idUsuario)
+            .ToList());
+          }
+      catch(Exception e) { return NotFound(e.Message); }
+        }
 
         [HttpGet("{idConversa}/{ultimaData}")]
         public ActionResult<List<ConversaMensagem>> Get(int idConversa, DateTime ultimaData)
@@ -68,15 +82,22 @@ namespace API.Controllers
             }            
         }
 
-        [HttpPost]
+        [HttpPost("/api/home/cadastro")]
         public ActionResult post([FromBody] Usuario model)
         {
           try
           {
-              _context.Usuario.Add(model);
-              _context.SaveChanges();
-              return Ok(model);
+              var userDb = _context.Usuario.FirstOrDefault(
+              o => o.email == model.email);
+          if (userDb != null)
+          {
+          return NotFound();
+
           }
+          _context.Usuario.Add(model);
+          _context.SaveChanges();
+          return Ok(model);
+      }
           catch
           {
             return this.StatusCode(StatusCodes.Status500InternalServerError, "Falha no acesso ao banco de dados.");
