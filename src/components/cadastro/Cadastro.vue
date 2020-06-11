@@ -60,7 +60,7 @@
 export default {
   //src="https://kit.fontawesome.com/9f8b65618e.js", crossorigin="anonymous"
 
-  props: ["proximaUrl"],
+
   data() {
     return {
       nome: "",
@@ -73,25 +73,30 @@ export default {
     async handleSubmit(e) {
       let self = this;
       e.preventDefault();
-      if (this.senha === this.confirmacaoSenha && this.senha.length > 0) {
-        try {
-          let url = "http://localhost:55707/api/home/cadastro";
-          const response = await this.$http.post(url, {
-            nome: this.nome,
-            email: this.email,
-            senha: this.senha
-          });
-          alert("Cadastro realizado com sucesso!");
-          self.$router.push("/login");
-        } catch (erro) {
-          console.log(erro);
-          alert(erro.body);
-          self.$router.go();
+      if(this.senha.length > 0){
+        if (this.senha === this.confirmacaoSenha) {
+          try {
+            let url = "http://localhost:55707/api/home/cadastro";
+            const response = await this.$http.post(url, {
+              nome: this.nome,
+              email: this.email,
+              senha: this.senha
+            });
+            alert("Cadastro realizado com sucesso!");
+            redirectLogin()
+          } catch (erro) {
+            console.log(erro);
+            alert(erro.body);
+            self.$router.go();
+          }
+        } else {
+          this.senha = "";
+          this.confirmacaoSenha = "";
+          return alert("Senhas incompatíveis.");
         }
-      } else {
-        this.senha = "";
-        this.confirmacaoSenha = "";
-        return alert("Senhas incompatíveis.");
+      }
+      else{
+        alert("Digite uma senha!")
       }
     },
     redirectLogin() {

@@ -18,7 +18,7 @@
                 <input type="file" id="select-file" @change="onFileChange" style="display : none" />
             </div>
            </div>
-          <div @click="logout">
+          <div>
               <p>Nome</p>
               <div>
                 <input type="text" :disabled = alterarEstado :class="{'alterar-nome' : alterarNome}" v-model="nome">
@@ -29,7 +29,7 @@
               <p>Seu ID:</p>
               <p>12312</p>
           </div>
-          <div>
+          <div @click="logout">
               <p>Sair</p>
               <button><font-awesome-icon :icon="['fas', 'sign-out-alt']" /></button>
           </div>
@@ -122,7 +122,7 @@ export default {
             url2: ""
         }
     },
-    methods:{
+    methods : {
         trocar(){
             this.abaPerfil = !this.abaPerfil;
         },
@@ -146,6 +146,10 @@ export default {
         onFileChange2(e) {
             const file2 = e.target.files[0];
             this.url2 = URL.createObjectURL(file2);
+        },
+        logout() {
+            localStorage.removeItem("idUsuario");
+            this.$router.go();
         }
     },
     name: 'Article01'

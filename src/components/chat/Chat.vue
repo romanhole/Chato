@@ -1,27 +1,22 @@
 <template>
-<div id="teste">
-  <div class="todo">
-      <Article01 id="A1"/>
-      <Article02 id="A2"/>
+  <div id="teste">
+    <div class="todo">
+      <Article01 id="A1" />
+      <Article02 id="A2" />
+    </div>
   </div>
-</div>
 </template>
 
 <script>
-import Article01 from '../Componentes/Article01';
-import Article02 from '../Componentes/Article02';
+import Article01 from "../Componentes/Article01";
+import Article02 from "../Componentes/Article02";
 export default {
-    data(){
-
-    },
-    components:{
-        Article01,
-        Article02
-    },
-    logout() {
-    localStorage.removeItem("idUsuario");
-    }
-}
+  data() {},
+  components: {
+    Article01,
+    Article02
+  }
+};
 //localStorage.setItem("user", response.data.user);
 
 /*window.onload = function(){
@@ -36,31 +31,31 @@ function atualizar(){
 </script>
 
 <style scoped>
-#teste{
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#teste {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.todo{
-    height: 800px;
-    width: 1400px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    overflow: hidden;
-    position: relative;
-    border-radius: 15px;
+.todo {
+  height: 800px;
+  width: 1400px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow: hidden;
+  position: relative;
+  border-radius: 15px;
 }
-#A1{
-    width: 25%;
-    height: 100%;
+#A1 {
+  width: 25%;
+  height: 100%;
 }
-#A2{
-    width: 75%;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
+#A2 {
+  width: 75%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
 }
 </style>
