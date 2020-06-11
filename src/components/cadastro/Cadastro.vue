@@ -5,7 +5,7 @@
         <h2 class="title title-primario">Bem-vindo!</h2>
         <p class="descricao">Logue no Chato com suas informações pessoais</p>
         <p class="descricao">e se divirta virtualmente!</p>
-        <button class="btn btn-primario">Login</button>
+        <button class="btn btn-primario" @click="redirectLogin">Login</button>
       </div>
       <div class="segunda-coluna">
         <h2 class="title title-secundario">Criar conta</h2>
@@ -71,29 +71,31 @@ export default {
   },
   methods: {
     async handleSubmit(e) {
+      let self = this;
       e.preventDefault();
       if (this.senha === this.confirmacaoSenha && this.senha.length > 0) {
         try {
-          let self = this;
           let url = "http://localhost:55707/api/home/cadastro";
           const response = await this.$http.post(url, {
             nome: this.nome,
             email: this.email,
             senha: this.senha
           });
-          localStorage.setItem("user", JSON.stringify(response.data.user));
           alert("Cadastro realizado com sucesso!");
-          self.router.push("/login");
+          self.$router.push("/login");
         } catch (erro) {
           console.log(erro);
-          alert("Email já existente!");
-          self.$router.push("/cadastro");
+          alert(erro.body);
+          self.$router.go();
         }
       } else {
         this.senha = "";
         this.confirmacaoSenha = "";
         return alert("Senhas incompatíveis.");
       }
+    },
+    redirectLogin() {
+      this.$router.push("/login");
     }
   }
 };

@@ -20,18 +20,18 @@ const router = new VueRouter({
   routes: routes
 });
 
-/*router.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) => {
   // redireciona à pàgina de login se não estiver logado e tentar entrar em página restrita.
   const publicPages = ["/", "/login", "/cadastro"];
   const authRequired = !publicPages.includes(to.path);
-  const loggedIn = localStorage.getItem("user");
+  const loggedIn = localStorage.getItem("idUsuario");
 
   if (authRequired && !loggedIn) {
     return next("/login");
   }
 
   next();
-});*/
+});
 
 new Vue({
   el: "#app",

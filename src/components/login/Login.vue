@@ -5,7 +5,9 @@
         <h2 class="titulo titulo-primario">Olá, Amigo</h2>
         <p class="description">Insira seus dados pessoais</p>
         <p class="description">e cadastre-se no Chato!</p>
-        <button class="botao botao-primario">Cadastre-se</button>
+        <button class="botao botao-primario" @click="redirectCadastro">
+          Cadastre-se
+        </button>
       </div>
       <div class="segundacoluna">
         <h2 class="titulo titulo-secundario">Faça login no Chato!</h2>
@@ -65,22 +67,21 @@ export default {
           });
 
           if (response == null) {
-            self.router.push("/login");
-            alert("null");
+            self.$router.go();
           }
-
-          alert(response.data.idUsuario);
           localStorage.setItem("idUsuario", response.data.idUsuario);
 
-          alert("foi");
-          self.router.push("/chat");
+          self.$router.push("/chat");
         } catch (erro) {
           console.log(erro);
-          alert("num foi");
+          alert(erro.body);
         }
       } else {
         return alert("Insira uma senha!");
       }
+    },
+    redirectCadastro() {
+      this.$router.push("/cadastro");
     }
   }
 };
