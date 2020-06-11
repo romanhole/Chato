@@ -58,26 +58,25 @@ export default {
       e.preventDefault();
       if (this.senha.length > 0) {
         try {
-          let url = "http://localhost:55707/api/home/login/" + this.email;
-          const response = await this.$http.get(url);
+          let url = "http://localhost:55707/api/home/login";
+          const response = await this.$http.post(url, {
+            email: this.email,
+            senha: this.senha
+          });
 
           if (response == null) {
             self.router.push("/login");
             alert("null");
           }
 
-          response.forEach(function(item) {
-            if (senha == item.senha) {
-              self.router.router.push("/chat");
-              localStorage.setItem("idUsuario", item.idUsuario);
-              alert("foi");
-            } else {
-              self.router.push("/login");
-              alert("nao foi");
-            }
-          });
+          alert(response.data.idUsuario);
+          localStorage.setItem("idUsuario", response.data.idUsuario);
+
+          alert("foi");
+          self.router.push("/chat");
         } catch (erro) {
           console.log(erro);
+          alert("num foi");
         }
       } else {
         return alert("Insira uma senha!");

@@ -24,7 +24,7 @@ namespace API.Controllers
     }
 
     [HttpGet("{idConversa}")]
-    public ActionResult<List<ConversaMensagem>> GetAll(int idConversa)
+    public ActionResult<List<ConversaMensagem>> GetAllMensagens(int idConversa)
     {
       try
       {
@@ -37,7 +37,7 @@ namespace API.Controllers
     }
 
     [HttpGet]
-    public ActionResult<List<Usuario>> GetAll()
+    public ActionResult<List<Usuario>> GetAllUsuarios()
     {
       try
       {
@@ -46,25 +46,10 @@ namespace API.Controllers
         .ToList());
       }
       catch (Exception e) { return NotFound(e.Message); }
-    }
-
-    [HttpGet("/api/home/login/{emailUsuario}")]
-    public ActionResult<List<Usuario>> Get(string emailUsuario)
-    {
-      try
-      {
-        var result = _context.Usuario
-          .Where(o => o.email == emailUsuario)
-          .OrderBy(o => o.idUsuario)
-          .ToList();
-
-        return Ok(result);
-      }
-      catch(Exception e) { return NotFound(e.Message); }
-    }
+    }   
 
     [HttpGet("{idConversa}/{ultimaData}")]
-    public ActionResult<List<ConversaMensagem>> Get(int idConversa, DateTime ultimaData)
+    public ActionResult<List<ConversaMensagem>> GetUltimaMensagem(int idConversa, DateTime ultimaData)
     {
       try
       {
@@ -83,7 +68,7 @@ namespace API.Controllers
 
 
     [HttpPost]
-    public ActionResult post([FromBody]ConversaMensagem model)
+    public ActionResult postConversaMensagem([FromBody]ConversaMensagem model)
     {
       try
       {
@@ -98,14 +83,14 @@ namespace API.Controllers
     }
 
     [HttpPost("/api/home/cadastro")]
-    public ActionResult post([FromBody] Usuario model)
+    public ActionResult postCadastro([FromBody] Usuario model)
     {
       try
       {
         var userDb = _context.Usuario.FirstOrDefault(
             o => o.email == model.email);
         if (userDb != null)
-          return NotFound();
+          return NotFound("Usuário já existente");
 
         _context.Usuario.Add(model);
         _context.SaveChanges();
@@ -117,6 +102,21 @@ namespace API.Controllers
       }
     }
 
+    [HttpPost("/api/home/login")]
+    public ActionResult postLogin([FromBody] Usuario model)
+    {
+      try
+      {
+        var userDb = _context.Usuario.FirstOrDefault(
+          o => o.email == model.email && o.senha == model.senha);
+
+        if (userDb == null)
+          return NotFound("Email ou senha incorretos");
+
+        return Ok(userDb);
+      }
+      catch (Exception e) { return NotFound(e.Message); }
+    }
 
     [HttpPut("{idConversaMensagem}")]
     public async Task<IActionResult> put(int idConversaMensagem, ConversaMensagem model)

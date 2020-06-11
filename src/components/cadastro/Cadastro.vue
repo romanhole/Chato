@@ -86,6 +86,8 @@ export default {
           self.router.push("/login");
         } catch (erro) {
           console.log(erro);
+          alert("Email já existente!");
+          self.$router.push("/cadastro");
         }
       } else {
         this.senha = "";
