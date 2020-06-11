@@ -18,7 +18,7 @@
                 <input type="file" id="select-file" @change="onFileChange" style="display : none" />
             </div>
            </div>
-          <div>
+          <div @click="logout">
               <p>Nome</p>
               <div>
                 <input type="text" :disabled = alterarEstado :class="{'alterar-nome' : alterarNome}" v-model="nome">
