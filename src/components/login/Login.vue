@@ -70,6 +70,12 @@ export default {
             self.$router.go();
           }
           localStorage.setItem("idUsuario", response.data.idUsuario);
+          this.$store.commit("alterarUsuario", {
+            id: response.data.id,
+            nome: response.data.nome,
+            email: response.data.email,
+            senha: response.data.senha
+          })
 
           self.$router.push("/chat");
         } catch (erro) {

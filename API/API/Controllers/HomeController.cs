@@ -9,6 +9,7 @@ using API.Models;
 using System;
 using System.Reflection.Metadata.Ecma335;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace API.Controllers
 {
@@ -66,6 +67,22 @@ namespace API.Controllers
       }
     }
 
+    [HttpPost]
+    public ActionResult postUsuario([FromBody] Usuario model)
+    {
+      try
+      {
+        var userDb = _context.Usuario.FirstOrDefault(
+          o => o.idUsuario == model.idUsuario);
+
+        if (userDb == null)
+          return NotFound("ID Inexistente");
+
+        return Ok(userDb);
+      }
+      catch (Exception e) { return NotFound(e.Message); }
+    }
+
 
     [HttpPost]
     public ActionResult postConversaMensagem([FromBody]ConversaMensagem model)
@@ -96,10 +113,7 @@ namespace API.Controllers
         _context.SaveChanges();
         return Ok(model);
       }
-      catch
-      {
-        return this.StatusCode(StatusCodes.Status500InternalServerError, "Falha no acesso ao banco de dados.");
-      }
+      catch (Exception e) { return NotFound(e.Message); }
     }
 
     [HttpPost("/api/home/login")]

@@ -13,7 +13,8 @@ import Article02 from "../Componentes/Article02";
 import Modal from "../Componentes/Modal";
 export default {
   mounted(){
-    //alert(this.$store.state.user.id)
+    alert(this.$store.state.user.senha)
+
   },
   data() {},
   components: {

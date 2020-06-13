@@ -15,19 +15,42 @@ export default new Vuex.Store({
  },
  getters: {},
  mutations: {
-   mudarId(state, payload){
+   alterarId(state, payload){
      state.user.id = payload;
    },
-   mudarNome(state, payload){
+   alterarNome(state, payload){
      state.user.nome = payload;
    },
-   mudarEmail(state, payload){
+   alterarEmail(state, payload){
      state.user.email = payload;
    },
-   mudarSenha(state, payload){
+   alterarSenha(state, payload){
      state.user.senha = payload;
+   },
+   alterarUsuario(state, payload){
+     state.user.id = payload.id;
+     state.user.nome = payload.nome;
+     state.user.email = payload.email;
+     state.user.senha = payload.senha;
    }
    //this.$store.commit("changeName", "New Name");
  },
- actions: {}
+ actions: {
+    alterarId(context, payload){
+      context.commit("alterarId", payload)
+    },
+    alterarNome(context, payload){
+      context.commit("alterarNome", payload)
+    },
+    alterarEmail(context, payload){
+      context.commit("alterarEmail", payload)
+    },
+    alterarSenha(context, payload){
+      context.commit("alterarSenha", payload)
+    },
+    alterarUsuario(context, payload){
+      context.commit("alterarUsuario", payload)
+    },
+
+ }
 });
