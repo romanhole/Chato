@@ -12,7 +12,7 @@ import Article01 from "../Componentes/Article01";
 import Article02 from "../Componentes/Article02";
 export default {
   mounted(){
-    alert(this.$store.state.user.id)
+    //alert(this.$store.state.user.id)
   },
   data() {},
   components: {

@@ -14,6 +14,20 @@ export default new Vuex.Store({
    }
  },
  getters: {},
- mutations: {},
+ mutations: {
+   mudarId(state, payload){
+     state.user.id = payload;
+   },
+   mudarNome(state, payload){
+     state.user.nome = payload;
+   },
+   mudarEmail(state, payload){
+     state.user.email = payload;
+   },
+   mudarSenha(state, payload){
+     state.user.senha = payload;
+   }
+   //this.$store.commit("changeName", "New Name");
+ },
  actions: {}
 });
