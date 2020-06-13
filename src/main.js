@@ -6,6 +6,7 @@ import { routes } from "./router";
 import "./assets/style.css";
 import Axios from "axios";
 import VueAxios from "vue-axios";
+import store from "./store";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -34,6 +35,7 @@ router.beforeEach((to, from, next) => {
 });
 
 new Vue({
+  store,
   el: "#app",
   router,
   render: h => h(App)
