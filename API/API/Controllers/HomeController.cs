@@ -152,7 +152,7 @@ namespace API.Controllers
       {
         return this.StatusCode(StatusCodes.Status500InternalServerError, "Falha no acesso ao banco de dados.");
       }
-    }
+    }    
 
     [HttpDelete("{idConversaMensagem}")]
     public async Task<IActionResult> delete(int idConversaMensagem)

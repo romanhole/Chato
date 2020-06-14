@@ -21,7 +21,7 @@
           <div>
               <p>Nome</p>
               <div>
-                <input type="text" :disabled = alterarEstado :class="{'alterar-nome' : alterarNome}">{{this.$store.state.user.nome}}
+                <input type="text" :disabled = alterarEstado :class="{'alterar-nome' : alterarNome}" v-model="nome" id="inputNome">
                 <button @click="changeName"><font-awesome-icon :icon="['fas', 'edit']" v-if="alterarEstado"/><font-awesome-icon :icon="['fas', 'check']" v-else/></button>
                </div>
           </div>
@@ -121,6 +121,13 @@ export default {
             url2: ""
         }
     },
+    computed: {
+      nome: {
+        get(){
+          return this.$store.state.user.nome;
+        }
+      }
+    },
     methods : {
         trocar(){
             this.abaPerfil = !this.abaPerfil;
@@ -132,8 +139,16 @@ export default {
             this.abaGrupo = !this.abaGrupo;
         },
         changeName(){
+          if(!this.alterarNome){
             this.alterarNome = !this.alterarNome;
             this.alterarEstado = !this.alterarEstado;
+          }
+          else{
+            this.alterarNome = !this.alterarNome
+            this.alterarEstado = !this.alterarEstado
+            this.$store.commit("alterarNome", document.getElementById('inputNome').value);
+
+          }
         },
         addAmigo(){
             this.abaAmigo = !this.abaAmigo;
