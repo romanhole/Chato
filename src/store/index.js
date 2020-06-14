@@ -1,4 +1,3 @@
-
 import Vue from "vue";
 import Vuex from "vuex";
 
@@ -8,9 +7,9 @@ export default new Vuex.Store({
  state: {
    user: {
      id: null,
-     nome: '',
-     email: '',
-     senha: ''
+     nome: null,
+     email: null,
+     senha: null
    }
  },
  getters: {},

@@ -67,7 +67,7 @@ namespace API.Controllers
       }
     }
 
-    [HttpPost]
+    [HttpPost("/api/home/usuario")]
     public ActionResult postUsuario([FromBody] Usuario model)
     {
       try

@@ -12,9 +12,21 @@ import Article01 from "../Componentes/Article01";
 import Article02 from "../Componentes/Article02";
 import Modal from "../Componentes/Modal";
 export default {
-  mounted(){
-    alert(this.$store.state.user.senha)
-
+  async mounted(){ // conexao com a API
+    let self = this;
+      try{
+        let url = "http://localhost:55707/api/home/usuario";
+        const response = await this.$http.post(url, {idUsuario: JSON.parse(localStorage.getItem("idUsuario"))});
+        self.$store.commit("alterarUsuario", {
+            id: response.data.idUsuario,
+            nome: response.data.nome,
+            email: response.data.email,
+            senha: response.data.senha
+          });
+      }catch (erro) {
+          console.log(erro);
+          alert("erro");
+      }
   },
   data() {},
   components: {
@@ -22,7 +34,7 @@ export default {
     Article02,
     Modal
   }
-};
+}
 //localStorage.setItem("user", response.data.user);
 
 /*window.onload = function(){

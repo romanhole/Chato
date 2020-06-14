@@ -21,13 +21,13 @@
           <div>
               <p>Nome</p>
               <div>
-                <input type="text" :disabled = alterarEstado :class="{'alterar-nome' : alterarNome}" v-model="nome">
+                <input type="text" :disabled = alterarEstado :class="{'alterar-nome' : alterarNome}">{{this.$store.state.user.nome}}
                 <button @click="changeName"><font-awesome-icon :icon="['fas', 'edit']" v-if="alterarEstado"/><font-awesome-icon :icon="['fas', 'check']" v-else/></button>
                </div>
           </div>
           <div>
               <p>Seu ID:</p>
-              <p>12312</p>
+              <p>{{this.$store.state.user.id}}</p>
           </div>
           <div @click="logout">
               <p>Sair</p>
@@ -116,7 +116,6 @@ export default {
             abaGrupo: false,
             alterarNome: false,
             alterarEstado: true,
-            nome: "Rafael Romanhole",
             abaAmigo: false,
             url: "",
             url2: ""

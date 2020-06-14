@@ -64,20 +64,12 @@ export default {
           const response = await this.$http.post(url, {
             email: this.email,
             senha: this.senha
-          });
-
-          if (response == null) {
-            self.$router.go();
-          }
-          localStorage.setItem("idUsuario", response.data.idUsuario);
-          this.$store.commit("alterarUsuario", {
-            id: response.data.id,
-            nome: response.data.nome,
-            email: response.data.email,
-            senha: response.data.senha
           })
-
+          if (response == null)
+            self.$router.go();
+          localStorage.setItem("idUsuario", JSON.stringify(response.data.idUsuario));
           self.$router.push("/chat");
+
         } catch (erro) {
           console.log(erro);
           alert(erro.body);
