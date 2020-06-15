@@ -1,6 +1,7 @@
 <template>
   <div id="teste">
     <div class="todo">
+      <Modal/>
       <Article01 id="A1" />
       <Article02 id="A2" />
     </div>

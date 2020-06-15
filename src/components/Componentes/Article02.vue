@@ -12,27 +12,45 @@
                 </div>-->
                 <div class="recebida">
                     <h1>João</h1>
-                    <p>Ola, amigos tudo bem?</p>
-                </div>
+                    <div>
+                        <p>Ola, amigos tudo bem?</p>
+                        <p>20:30</p>
+                    </div>
+                </div>                          
                 <div class="mensagem enviada">
                     <h1></h1>
-                    <p>orem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in condimentum nulla. Mauris convallis nisl sed pharetra suscipit. Vivamus euismod pulvinar leo quis gravida. Curabitur in magna sem.</p>
+                    <div>
+                        <p>Ola, amigos tudo bem?</p>
+                        <p>20:30</p>
+                    </div>
                 </div>
                 <div class="enviada">
                     <h1></h1>
-                    <p>Horas trabalhadas: 11h00</p>
+                    <div>
+                        <p>Ola, amigos tudo bem?</p>
+                        <p>20:30</p>
+                    </div>
                 </div>
                 <div class="enviada">
                     <h1></h1>
-                    <p>Eai pessoal, tranquilos?</p>
+                    <div>
+                        <p>Ola, amigos tudo bem?</p>
+                        <p>20:30</p>
+                    </div>
                 </div>
                 <div class="recebida">
                     <h1>Marcelao</h1>
-                    <p>Oba, pc quebro</p>
+                    <div>
+                        <p>Ola, amigos tudo bem?</p>
+                        <p>20:30</p>
+                    </div>
                 </div>
                 <div class="recebida">
                     <h1>Pires</h1>
-                    <p>eai João? Você poderia me ajudar num negócio?</p>
+                    <div>
+                        <p>Ola, amigos tudo bem?</p>
+                        <p>20:30</p>
+                    </div>
                 </div>
               </div>
               <div class="right-03" @click="dadosGrupo">
@@ -69,7 +87,7 @@
                 <div>
                     <p>4 participantes</p>
                 </div>
-                <div>
+                <div @click="abrirModal">
                     <button><font-awesome-icon :icon="['fas', 'user-plus']"/></button>
                     <div>
                         <hr>
@@ -132,6 +150,7 @@
 </template>
 
 <script>
+import store from '../../store'
 export default {
     data(){
         return{
@@ -160,6 +179,9 @@ export default {
             this.alterarNome2 = !this.alterarNome2;
             this.alterarEstado2 = !this.alterarEstado2;
         },
+        abrirModal(){
+            store.dispatch("alterarModal");
+        }
     },
     name: 'Article02'
 }
@@ -245,13 +267,24 @@ export default {
     border-radius: 10px;
     margin-bottom: 10px;
 }
-.right-02>div h1{
+.right-02>div>h1{
     font-size: 17px;
     color: blue;
     margin-bottom: 3px;
 }
-.right-02>div p{
+.right-02>div>div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.right-02>div>div>p:nth-child(1){
     text-align: justify;
+    margin-right: 20px;
+}
+.right-02>div>div>p:nth-child(2){
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.411);
 }
 .recebida{
     align-self: flex-start;

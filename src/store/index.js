@@ -11,10 +11,15 @@ export default new Vuex.Store({
      id: null,
      nome: null,
      email: null,
-     senha: null
-   }
+     senha: null,
+   },
+   open: false,
  },
- getters: {},
+ getters: {
+    getOpen(state){
+      return state.open;
+    }
+ },
  mutations: {
    alterarId(state, payload){
      state.user.id = payload;
@@ -33,6 +38,9 @@ export default new Vuex.Store({
      state.user.nome = payload.nome;
      state.user.email = payload.email;
      state.user.senha = payload.senha;
+   },
+   alterarModal(state){
+     state.open = !state.open;
    }
    //this.$store.commit("changeName", "New Name");
  },
@@ -48,6 +56,9 @@ export default new Vuex.Store({
     }catch(erro){
       alert(erro);
     }
+  },
+  alterarModal({commit}){
+    commit("alterarModal");
   }
  }
 });
