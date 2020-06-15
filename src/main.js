@@ -23,7 +23,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   // redireciona à pàgina de login se não estiver logado e tentar entrar em página restrita.
-  const publicPages = ["/", "/login", "/cadastro"];
+  const publicPages = ["/", "/login", "/cadastro", "/avaliacao"];
   const authRequired = !publicPages.includes(to.path);
   const loggedIn = localStorage.getItem("idUsuario");
 
