@@ -132,8 +132,23 @@ namespace API.Controllers
       catch (Exception e) { return NotFound(e.Message); }
     }
 
+    [HttpPut("/api/home/putNome")]
+    public async Task<IActionResult> putNome([FromBody] Usuario model)
+    {
+      try
+      {
+        var result = await _context.Usuario.FindAsync(model.idUsuario);
+        if(model.idUsuario != result.idUsuario) { return BadRequest("Erro na troca de nome"); }
+        result.nome = model.nome;
+
+        await _context.SaveChangesAsync();
+        return Ok();
+      }
+      catch(Exception e) { return NotFound(e.Message); }
+    }
+
     [HttpPut("{idConversaMensagem}")]
-    public async Task<IActionResult> put(int idConversaMensagem, ConversaMensagem model)
+    public async Task<IActionResult> putConversaMensagem(int idConversaMensagem, ConversaMensagem model)
     {
       try
       {

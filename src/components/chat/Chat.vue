@@ -25,7 +25,7 @@ export default {
           });
       }catch (erro) {
           console.log(erro);
-          alert("erro");
+          alert(erro.body);
       }
   },
   data() {},

@@ -1,5 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import Axios from "axios";
+
 
 Vue.use(Vuex);
 
@@ -35,21 +37,17 @@ export default new Vuex.Store({
    //this.$store.commit("changeName", "New Name");
  },
  actions: {
-    alterarId(context, payload){
-      context.commit("alterarId", payload)
-    },
-    alterarNome(context, payload){
+  alterarNome(context, payload){
+    let self = this;
+    try{
       context.commit("alterarNome", payload)
-    },
-    alterarEmail(context, payload){
-      context.commit("alterarEmail", payload)
-    },
-    alterarSenha(context, payload){
-      context.commit("alterarSenha", payload)
-    },
-    alterarUsuario(context, payload){
-      context.commit("alterarUsuario", payload)
-    },
-
+      let url = "http://localhost:55707/api/home/putNome"
+      const response = Axios.put(url, {
+        idUsuario: self.state.user.id,
+        nome: payload});
+    }catch(erro){
+      alert(erro);
+    }
+  }
  }
 });

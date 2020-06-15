@@ -118,13 +118,16 @@ export default {
             alterarEstado: true,
             abaAmigo: false,
             url: "",
-            url2: ""
+            url2: "",
         }
     },
     computed: {
       nome: {
         get(){
           return this.$store.state.user.nome;
+        },
+        set(value){
+          this.$store.commit("alterarNome", value)
         }
       }
     },
@@ -138,7 +141,7 @@ export default {
         criarGrupo(){
             this.abaGrupo = !this.abaGrupo;
         },
-        changeName(){
+        async changeName(){
           if(!this.alterarNome){
             this.alterarNome = !this.alterarNome;
             this.alterarEstado = !this.alterarEstado;
@@ -146,8 +149,16 @@ export default {
           else{
             this.alterarNome = !this.alterarNome
             this.alterarEstado = !this.alterarEstado
-            this.$store.commit("alterarNome", document.getElementById('inputNome').value);
-
+            let self = this;
+            try{
+              let url = "http://localhost:55707/api/home/putNome"
+              const response = await this.$http.put(url, {
+                idUsuario: self.$store.state.user.id,
+                nome: self.$store.state.user.nome});
+            }catch(erro){
+              console.log(erro);
+              alert(erro.body);
+            }
           }
         },
         addAmigo(){
