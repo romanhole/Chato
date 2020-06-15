@@ -13,7 +13,7 @@
                 <div class="recebida">
                     <h1>João</h1>
                     <p>Ola, amigos tudo bem?</p>
-                </div>                          
+                </div>
                 <div class="mensagem enviada">
                     <h1></h1>
                     <p>orem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in condimentum nulla. Mauris convallis nisl sed pharetra suscipit. Vivamus euismod pulvinar leo quis gravida. Curabitur in magna sem.</p>
@@ -77,28 +77,28 @@
                     </div>
                 </div>
                 <div class="participantes" :class="{ 'participantesAberto': abaDados}">
-                    <img src="../../assets/meuperfil.jpg"/>
+                    <img src="../../assets/imgs/meuperfil.jpg"/>
                     <div>
                         <hr>
                         <p>Você</p>
                     </div>
                 </div>
                 <div class="participantes" :class="{ 'participantesAberto': abaDados}">
-                    <img src="../../assets/meuperfil.jpg"/>
+                    <img src="../../assets/imgs/meuperfil.jpg"/>
                     <div>
                         <hr>
                         <p>Pires</p>
                     </div>
                 </div>
                 <div class="participantes" :class="{ 'participantesAberto': abaDados}">
-                    <img src="../../assets/meuperfil.jpg"/>
+                    <img src="../../assets/imgs/meuperfil.jpg"/>
                     <div>
                         <hr>
                         <p>João</p>
                     </div>
                 </div>
                 <div class="participantes" :class="{ 'participantesAberto': abaDados}">
-                    <img src="../../assets/meuperfil.jpg"/>
+                    <img src="../../assets/imgs/meuperfil.jpg"/>
                     <div>
                         <hr>
                         <p>Marcelao</p>
@@ -142,7 +142,7 @@ export default {
             alterarEstado2: true,
             alterarNome2: false,
             grupo: true,
-            urlAmigo: "../../assets/meuperfil.jpg"
+            urlAmigo: "../../assets/imgs/meuperfil.jpg"
         }
     },
     methods:{

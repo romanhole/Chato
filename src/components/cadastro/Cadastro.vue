@@ -66,7 +66,8 @@ export default {
       nome: "",
       email: "",
       senha: "",
-      confirmacaoSenha: ""
+      confirmacaoSenha: "",
+      fotoPerfil: "../../assets/unknown.png"
     };
   },
   methods: {
@@ -80,7 +81,9 @@ export default {
             const response = await this.$http.post(url, {
               nome: this.nome,
               email: this.email,
-              senha: this.senha
+              senha: this.senha,
+              fotoPerfil: this.fotoPerfil
+
             });
             alert("Cadastro realizado com sucesso!");
             redirectLogin()

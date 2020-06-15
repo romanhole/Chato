@@ -13,7 +13,7 @@
                     <div :class="{'alterar-imagem' : url == ''}">
                         <p>ADICIONAR NOVA IMAGEM DE PERFIL</p>
                     </div>
-                    <img :src="url" v-if="url != ''"/>
+                    <img :src="fotoPerfil"/>
                 </label>
                 <input type="file" id="select-file" @change="onFileChange" style="display : none" />
             </div>
@@ -42,7 +42,7 @@
               </div>
           </div>
           <div>
-                <p>Coloque o Id de seu novo amigo</p>
+                <p>Coloque o ID de seu novo amigo</p>
                 <input type="text"/>
                 <button><font-awesome-icon :icon="['fas', 'check']" /></button>
           </div>
@@ -75,7 +75,7 @@
       <div class="item article-01">
           <div class="left">
               <div class="left-01">
-                  <img :src= "url" @click="trocar"/>
+                  <img :src= "fotoPerfil" @click="trocar"/>
                   <div>
                     <button @click="addAmigo"><font-awesome-icon :icon="['fas', 'user-plus']"/></button>
                     <button @click="criarGrupo"><font-awesome-icon :icon="['fas', 'comment-alt']" /></button>
@@ -94,7 +94,7 @@
                       </div>
                   </div>
                   <div class="amigos" @click="grupoSelecionado" :class="{ 'selecionado': selecionado }">
-                      <img src="../../assets/pp.jpg"/>
+                      <img src="../../assets/imgs/pp.jpg"/>
                       <div>
                           <p>pdz9</p>
                           <p>E faço aquela página de avaliação lá</p>
@@ -108,6 +108,7 @@
 </template>
 
 <script>
+import fotoPerfil from "../../assets/imgs/unknown.png"
 export default {
     data(){
         return{
@@ -117,7 +118,7 @@ export default {
             alterarNome: false,
             alterarEstado: true,
             abaAmigo: false,
-            url: "",
+            fotoPerfil: fotoPerfil,
             url2: "",
         }
     },
