@@ -2,6 +2,7 @@ import Home from "./components/home/Home.vue";
 import Cadastro from "./components/cadastro/Cadastro.vue";
 import Chat from "./components/chat/Chat.vue";
 import Login from "./components/login/Login.vue";
+import Avaliacao from "./components/avaliacao/Avaliacao.vue"
 import axios from "axios";
 
 export const routes = [
@@ -33,6 +34,13 @@ export const routes = [
       requiresAuth: true
     }
   },
-
+  {
+    path: "/avaliacao",
+    name: "avaliacao",
+    component: Avaliacao,
+    meta:{
+      guest: true
+    }
+  },
   { path: "*", redirect: "/" }
 ];
