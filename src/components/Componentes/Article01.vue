@@ -15,7 +15,7 @@
                     </div>
                     <img v-bind:src="require('../../assets/imgs/'+fotoPerfil)"/>
                 </label>
-                <input type="file" id="select-file" @change="onFileChange" style="display : none" />
+                <input type="file" id="select-file" @change="onFileChangePerfil" style="display : none" />
             </div>
            </div>
           <div>
@@ -62,7 +62,7 @@
                     </div>
                     <img :src="url2" v-if="url2 != ''"/>
                 </label>
-                <input type="file" id="select-file2" @change="onFileChange2" style="display : none" />
+                <input type="file" id="select-file2" @change="onFileChangeGrupo" style="display : none" />
             </div>
           </div>
           <div>
@@ -173,11 +173,11 @@ export default {
         addAmigo(){
             this.abaAmigo = !this.abaAmigo;
         },
-        onFileChange(e) {
+        onFileChangePerfil(e) {
             const file = e.target.files[0];
             this.url = URL.createObjectURL(file);
         },
-        onFileChange2(e) {
+        onFileChangeGrupo(e) {
             const file2 = e.target.files[0];
             this.url2 = URL.createObjectURL(file2);
         },
