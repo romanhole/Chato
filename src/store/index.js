@@ -12,6 +12,8 @@ export default new Vuex.Store({
      nome: null,
      email: null,
      senha: null,
+     fotoPerfil: null,
+     amigos: []
    },
    open: false,
  },
@@ -38,9 +40,13 @@ export default new Vuex.Store({
      state.user.nome = payload.nome;
      state.user.email = payload.email;
      state.user.senha = payload.senha;
+     state.user.fotoPerfil = payload.fotoPerfil;
    },
    alterarModal(state){
      state.open = !state.open;
+   },
+   alterarImagem(state, payload){
+     state.user.fotoPerfil = payload;
    }
    //this.$store.commit("changeName", "New Name");
  },
@@ -59,6 +65,9 @@ export default new Vuex.Store({
   },
   alterarModal({commit}){
     commit("alterarModal");
+  },
+  alterarImagem(context, payload){
+    let self = this;
   }
  }
 });

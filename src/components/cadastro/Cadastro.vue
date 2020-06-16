@@ -67,7 +67,7 @@ export default {
       email: "",
       senha: "",
       confirmacaoSenha: "",
-      fotoPerfil: "../../assets/unknown.png"
+      fotoPerfil: "unknown.png"
     };
   },
   methods: {
@@ -83,10 +83,9 @@ export default {
               email: this.email,
               senha: this.senha,
               fotoPerfil: this.fotoPerfil
-
             });
             alert("Cadastro realizado com sucesso!");
-            redirectLogin()
+            self.$router.push("/login")
           } catch (erro) {
             console.log(erro);
             alert(erro.body);

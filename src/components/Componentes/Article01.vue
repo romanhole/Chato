@@ -10,10 +10,10 @@
           <div>
             <div>
                 <label for="select-file">
-                    <div :class="{'alterar-imagem' : url == ''}">
+                    <div :class="{'alterar-imagem' : fotoPerfil == ''}">
                         <p>ADICIONAR NOVA IMAGEM DE PERFIL</p>
                     </div>
-                    <img :src="fotoPerfil"/>
+                    <img v-bind:src="require('../../assets/imgs/'+fotoPerfil)"/>
                 </label>
                 <input type="file" id="select-file" @change="onFileChange" style="display : none" />
             </div>
@@ -43,8 +43,8 @@
           </div>
           <div>
                 <p>Coloque o ID de seu novo amigo</p>
-                <input type="text"/>
-                <button><font-awesome-icon :icon="['fas', 'check']" /></button>
+                <input type="text" id="idAmigo"/>
+                <button @click="adicionarAmigo"><font-awesome-icon :icon="['fas', 'check']" /></button>
           </div>
       </div>
       <div class="item article-003" :class="{'grupo-aberto' : abaGrupo}">
@@ -75,7 +75,7 @@
       <div class="item article-01">
           <div class="left">
               <div class="left-01">
-                  <img :src= "fotoPerfil" @click="trocar"/>
+                  <img v-bind:src="require('../../assets/imgs/'+fotoPerfil)" @click="trocar"/>
                   <div>
                     <button @click="addAmigo"><font-awesome-icon :icon="['fas', 'user-plus']"/></button>
                     <button @click="criarGrupo"><font-awesome-icon :icon="['fas', 'comment-alt']" /></button>
@@ -108,7 +108,7 @@
 </template>
 
 <script>
-import fotoPerfil from "../../assets/imgs/unknown.png"
+
 export default {
     data(){
         return{
@@ -118,7 +118,7 @@ export default {
             alterarNome: false,
             alterarEstado: true,
             abaAmigo: false,
-            fotoPerfil: fotoPerfil,
+            url: "",
             url2: "",
         }
     },
@@ -130,6 +130,14 @@ export default {
         set(value){
           this.$store.commit("alterarNome", value)
         }
+      },
+      fotoPerfil: {
+          get(){
+             return this.$store.state.user.fotoPerfil;
+          },
+          set(value){
+          this.$store.commit("alterarImagem", value)
+          }
       }
     },
     methods : {
@@ -176,6 +184,22 @@ export default {
         logout() {
             localStorage.removeItem("idUsuario");
             this.$router.go();
+        },
+        async adicionarAmigo(){
+            let idAmigo = parseInt(document.getElementById('idAmigo').value);
+            if(idAmigo != ''){
+              try{
+                let self = this;
+                let url = "http://localhost:55707/api/home/adicionarAmigo";
+                const response = await this.$http.post(url, {
+                  idUsuario: self.$store.state.user.id,
+                  idAmigo: idAmigo});
+                alert("Amigo adicionado com sucesso!")
+              }catch (erro) {
+              console.log(erro);
+              alert(erro.body);
+            }
+          }else{alert("ID vazio!")}
         }
     },
     name: 'Article01'

@@ -22,7 +22,8 @@ export default {
             id: response.data.idUsuario,
             nome: response.data.nome,
             email: response.data.email,
-            senha: response.data.senha
+            senha: response.data.senha,
+            fotoPerfil: response.data.fotoPerfil
           });
       }catch (erro) {
           console.log(erro);
