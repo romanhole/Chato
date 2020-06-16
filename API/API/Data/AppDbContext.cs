@@ -14,5 +14,6 @@ namespace API.Data
         public DbSet<ConversaMensagem> ConversaMensagem { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Amigos> Amigos { get; set; }
+        public DbSet<UsuarioConversa> UsuarioConversa { get; set; }
     }
 }

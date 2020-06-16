@@ -1,5 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Threading;
+
 namespace API.Models
 {
     public class Usuario
@@ -9,6 +11,6 @@ namespace API.Models
         public string nome { get; set; }
         public string senha { get; set; }
         public string email { get; set; }
-        public string fotoPerfil { get; set; }
+        public string fotoPerfil { get; set; }   
     }
 }

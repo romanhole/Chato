@@ -85,19 +85,10 @@
                   <input type="text" id="procurar" placeholder="Procurar por conversas">
               </div>
               <div class="left-03">
-                  <div class="amigos" @click="grupoSelecionado" :class="{ 'selecionado': selecionado }">
+                  <div class="amigos" @click="conversaSelecionada(c.idConversa)" :class="{ 'selecionado': selecionado }" v-for="c in conversas">
                       <img src="https://web.whatsapp.com/pp?e=https%3A%2F%2Fpps.whatsapp.net%2Fv%2Ft61.24694-24%2F75518813_135672844467532_4825498981546307180_n.jpg%3Foe%3D5EDEBAE7%26oh%3D7d719f1952dc7d8b1ecc1b71bea6c04c&t=l&u=5519987277158-1583320513%40g.us&i=1583320610&n=wKIscaInsu%2FhaxUDSCy%2FIX%2Fx7uoIm3SX6Pw0xlkvBkA%3D"/>
                       <div>
-                          <p>chat de pratica</p>
-                          <p>João: Ola, amigos tudo bem?</p>
-                          <hr>
-                      </div>
-                  </div>
-                  <div class="amigos" @click="grupoSelecionado" :class="{ 'selecionado': selecionado }">
-                      <img src="../../assets/imgs/pp.jpg"/>
-                      <div>
-                          <p>pdz9</p>
-                          <p>E faço aquela página de avaliação lá</p>
+                          <p>{{c.nomeConversa}}</p>
                           <hr>
                       </div>
                   </div>
@@ -110,6 +101,9 @@
 <script>
 
 export default {
+    mounted(){
+
+    },
     data(){
         return{
             selecionado: false,
@@ -119,7 +113,8 @@ export default {
             alterarEstado: true,
             abaAmigo: false,
             url: "",
-            url2: "",
+            url2: "" ,
+            conversas: []
         }
     },
     computed: {
@@ -138,14 +133,29 @@ export default {
           set(value){
           this.$store.commit("alterarImagem", value)
           }
+      },
+      idUsuario(){
+         return this.$store.state.user.id;
+      }
+
+    },
+    watch:{
+      async idUsuario(id){
+        try{
+        let url = "http://localhost:55707/api/home/"+id;
+        const response = await this.$http.get(url)
+        this.conversas = response.data;
+      }
+      catch(erro){console.log(erro)}
       }
     },
     methods : {
         trocar(){
             this.abaPerfil = !this.abaPerfil;
         },
-        grupoSelecionado(){
+        conversaSelecionada(id){
             this.selecionado = !this.selecionado;
+            this.$store.commit("alterarIdConversa", id);
         },
         criarGrupo(){
             this.abaGrupo = !this.abaGrupo;

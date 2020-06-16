@@ -6,52 +6,18 @@
                   <input type="text" id="msg" placeholder="Digite sua mensagem:">
               </div>
               <div class="right-02">
-                <!--<div v-for="message in messages" :key="message.Id" v-bind="message" :class="{['recebida']: message.recieved, ['enviada']: message.sended}">
+                <!--<div v-for="message in messages" :key="message.Id" v-bind="message" :class="{['recebida']: message.received, ['enviada']: message.sended}">
                     <h1 v-if="message.grupo">{{ message.Nome }}</h1>
-                    <p>{{ message.Text }}</p>
+                    <p>{{ message.Mensagem }}</p>
                 </div>-->
-                <div class="recebida">
-                    <h1>João</h1>
+                <div class="recebida" v-for="msg in messages">
+                    <h1>{{msg.nomeUsuario}}</h1>
                     <div>
-                        <p>Ola, amigos tudo bem?</p>
-                        <p>20:30</p>
-                    </div>
-                </div>                          
-                <div class="mensagem enviada">
-                    <h1></h1>
-                    <div>
-                        <p>Ola, amigos tudo bem?</p>
-                        <p>20:30</p>
+                        <p>{{msg.Mensagem}}</p>
+                        <p>{{msg.dataEnvio}}</p>
                     </div>
                 </div>
-                <div class="enviada">
-                    <h1></h1>
-                    <div>
-                        <p>Ola, amigos tudo bem?</p>
-                        <p>20:30</p>
-                    </div>
-                </div>
-                <div class="enviada">
-                    <h1></h1>
-                    <div>
-                        <p>Ola, amigos tudo bem?</p>
-                        <p>20:30</p>
-                    </div>
-                </div>
-                <div class="recebida">
-                    <h1>Marcelao</h1>
-                    <div>
-                        <p>Ola, amigos tudo bem?</p>
-                        <p>20:30</p>
-                    </div>
-                </div>
-                <div class="recebida">
-                    <h1>Pires</h1>
-                    <div>
-                        <p>Ola, amigos tudo bem?</p>
-                        <p>20:30</p>
-                    </div>
-                </div>
+
               </div>
               <div class="right-03" @click="dadosGrupo">
                     <img :src= "url3"/>
@@ -152,6 +118,9 @@
 <script>
 import store from '../../store'
 export default {
+    mounted(){
+
+    },
     data(){
         return{
             messages:[],
@@ -163,6 +132,18 @@ export default {
             grupo: true,
             urlAmigo: "../../assets/imgs/meuperfil.jpg"
         }
+    },
+    computed: {
+      idConversa() {return this.$store.state.user.idConversa}
+    },
+    watch: {
+      async idConversa(id){
+        const date = new Date();
+        let url = "http://localhost:55707/api/home/"+id+"/"+date.toJSON();
+        const response = await this.$http.get(url);
+        this.messages = response.data;
+        alert("aaaa")
+      }
     },
     methods:{
         dadosGrupo(){

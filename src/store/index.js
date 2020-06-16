@@ -13,7 +13,8 @@ export default new Vuex.Store({
      email: null,
      senha: null,
      fotoPerfil: null,
-     amigos: []
+     amigos: [],
+     idConversa: null
    },
    open: false,
  },
@@ -47,6 +48,9 @@ export default new Vuex.Store({
    },
    alterarImagem(state, payload){
      state.user.fotoPerfil = payload;
+   },
+   alterarIdConversa(state, payload){
+     state.user.idConversa = payload;
    }
    //this.$store.commit("changeName", "New Name");
  },

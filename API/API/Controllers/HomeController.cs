@@ -24,7 +24,7 @@ namespace API.Controllers
       _context = context;
     }
 
-    [HttpGet("{idConversa}")]
+    [HttpGet("/api/home/getMensagens/{idConversa}")]
     public ActionResult<List<ConversaMensagem>> GetAllMensagens(int idConversa)
     {
       try
@@ -33,6 +33,23 @@ namespace API.Controllers
                     .Where(o => o.idConversa == idConversa)
                     .OrderBy(o => o.dataEnvio)
                     .ToList());
+      }
+      catch (Exception e) { return NotFound(e.Message); }
+    }
+
+    [HttpGet("{idUsuario}")]
+    public ActionResult<List<UsuarioConversa>> GetAllUsuarioConversa(int idUsuario)
+    {
+      try
+      {
+        var conversas = _context.UsuarioConversa.Where(o => o.idUsuario == idUsuario).ToList(); ;
+        List <Conversa> listaConversas = new List<Conversa>();
+        foreach(var c in conversas)
+        {
+          listaConversas.Add(_context.Conversa.First(o => o.idConversa == c.idConversa));
+        }        
+        return Ok(listaConversas);
+          
       }
       catch (Exception e) { return NotFound(e.Message); }
     }
