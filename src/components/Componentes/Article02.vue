@@ -4,7 +4,7 @@
           <div class="right">
               <div class="right-01">
                   <input type="text" id="msg" placeholder="Digite sua mensagem:">
-                  <button id="envi" @click="mandarMsg">enviar</button>
+                  <button id="envi">enviar</button><!--@click="mandarMsg" -->
 
               </div>
               <div class="right-02">

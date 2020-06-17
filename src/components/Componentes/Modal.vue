@@ -69,6 +69,9 @@
                     </div>
                 </div>
             </div>
+            <div>
+                <button><font-awesome-icon :icon="['fas', 'check']" /></button>
+            </div>
         </div>
     </div>
 </template>
@@ -220,6 +223,23 @@ export default {
     .container>div>div:nth-child(4)::-webkit-scrollbar{
         background-color:#f0f0f0;
         width:15px
+    }
+    .container>div>div:nth-child(5){
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        padding: 20px;
+        z-index: 9999;
+    }
+    .container>div>div:nth-child(5)>button{
+        background-color: #8B0000;
+        border-radius: 50%;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
     }
 
     /* background of the scrollbar except button or resizer */

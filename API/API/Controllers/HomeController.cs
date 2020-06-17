@@ -37,7 +37,7 @@ namespace API.Controllers
       catch (Exception e) { return NotFound(e.Message); }
     }
 
-    [HttpGet("api/home/getAvaliacoes")]
+    [HttpGet("/api/home/getAvaliacoes")]
     public ActionResult<List<Avaliacao>> GetAllAvaliacoes()
     {
       try
