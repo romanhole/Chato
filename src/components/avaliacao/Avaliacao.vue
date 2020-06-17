@@ -21,9 +21,6 @@ export default{
         return{
             coment: "",
             not: "0",
-            avaliacoe: [],
-            notas: [],
-            media: "",
         };
     },
 
@@ -48,27 +45,20 @@ export default{
         async getAvaliacoes(){       
             try{
                 let url = "http://localhost:55707/api/home/getAvaliacoes";
-                const response = await this.$http.get(url)
-                this.avaliacoe = response.data;
-                this.avaliacoe.forEach(avaliacao => {
-                    notas.add(avaliacao.nota);
+                const response = await this.$http.get(url);
+                let elem = 0;
+                let soma = 0;
+                response.data.forEach(avaliacao => {
+                    soma += avaliacao.nota;
+                    elem++;
                 });
-                var elem = 0;
-                var soma = 0;
-                var media = 5;
-                while(notas[i]!=null){
-                    soma=notas[i];
-                    i++;
-                }
-                media= soma/elem;
-                document.getElementById("mda").innerHTML +=media
-                console.log("chegou");
-                console.log(notas[1]);
+                let media = soma/elem;
+                document.getElementById("mda").innerHTML += media;
             }   
             catch(erro){console.log(erro)}
         },
     },
-    beforeMount(){
+    mounted(){
         this.getAvaliacoes();
     }
 }
