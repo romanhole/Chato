@@ -4,6 +4,8 @@
           <div class="right">
               <div class="right-01">
                   <input type="text" id="msg" placeholder="Digite sua mensagem:">
+                  <button id="envi" @click="mandarMsg">enviar</button>
+
               </div>
               <div class="right-02">
                 <!--<div v-for="message in messages" :key="message.Id" v-bind="message" :class="{['recebida']: message.received, ['enviada']: message.sended}">
@@ -162,7 +164,20 @@ export default {
         },
         abrirModal(){
             store.dispatch("alterarModal");
-        }
+        },
+        /*async mandarMsg(){
+            try{
+                let url = "http://localhost:55707/";
+                const response = await this.$http.post(url, {
+                  idUsuario: parseInt(this.not),
+                  idConversa: this.coment,
+                  Mensagem: a,
+                  dataEnvio: b});
+              }catch (erro) {
+              console.log(erro);
+              alert(erro.body);
+            }
+        }*/
     },
     name: 'Article02'
 }
@@ -228,6 +243,13 @@ export default {
     justify-content: center;
     align-items: center;
     padding: 0 45px;
+}
+.right-01 button{
+    margin-left: 10px;
+    height: 34px;
+    width: 60px;
+    border-radius: 5px;
+    border: none;
 }
 .right-02{
     height: 680px;

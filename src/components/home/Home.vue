@@ -3,7 +3,7 @@
     <ul class="topnav">
       <li> <router-link to="/Login">Entrar</router-link></li>
       <li> <router-link to="/cadastro">Cadastro</router-link><li>
-      <li> <router-link to="/chat">Teste</router-link><li>
+      <li> <router-link to="/avaliacao">Avaliação</router-link><li>
       <li> <a href="#sobre">Sobre</a> </li>
       <li id="logo"> <!-- <img id="imgLogo"> --></li>
     </ul>

@@ -146,8 +146,8 @@ export default {
         let url = "http://localhost:55707/api/home/"+id;
         const response = await this.$http.get(url)
         this.conversas = response.data;
-      }
-      catch(erro){console.log(erro)}
+        }
+        catch(erro){console.log(erro)}
       }
     },
     methods : {
@@ -222,7 +222,7 @@ export default {
               }catch (erro) {
               console.log(erro);
               alert(erro.body);
-              }
+            }
         }
     },
     name: 'Article01'

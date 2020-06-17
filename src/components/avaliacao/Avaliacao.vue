@@ -1,41 +1,76 @@
 <template>
     <div class="pagina">
         <div class="avaliacao">
-            <input type="radio" id="star1" name="estrela" value="1" v-model="nota"><label for="star1"></label>
-            <input type="radio" id="star2" name="estrela"><label for="star2"></label>
-            <input type="radio" id="star3" name="estrela"><label for="star3"></label>
-            <input type="radio" id="star4" name="estrela"><label for="star4"></label>
-            <input type="radio" id="star5" name="estrela"><label for="star5"></label>
+            <input type="radio" id="star1" name="estrela" @click="darNota(5)"><label for="star1"></label>
+            <input type="radio" id="star2" name="estrela" @click="darNota(4)"><label for="star2"></label>
+            <input type="radio" id="star3" name="estrela" @click="darNota(3)"><label for="star3"></label>
+            <input type="radio" id="star4" name="estrela" @click="darNota(2)"><label for="star4"></label>
+            <input type="radio" id="star5" name="estrela"  @click="darNota(1)"><label for="star5"></label>
 
         </div>
         <div class="reclamacoes">
-                <textarea rows="4" cols="37" name="comentario" v-model="coment">Comente sua avaliação do chat aqui!</textarea><br>
-                <button class="botao avaliar" @click="avaliar">Avaliar</button>  
+            <p id="mda">Media das avaliações: </p>
+            <textarea rows="4" cols="37" name="comentario" v-model="coment">Comente sua avaliação do chat aqui!</textarea><br>
+            <button class="botao avaliar" @click="avaliar">Avaliar</button>  
         </div> 
     </div>
 </template>
 <script>
 export default{
-  /*  data(){
+    data(){
         return{
             coment: "",
-            nota: 1,
-        },
+            not: "0",
+            avaliacoe: [],
+            notas: [],
+            media: "",
+        };
     },
-    methods :  {
+
+    methods : {
+        darNota(estrela){
+            this.not=estrela
+        },
         async avaliar(){
             try{
                 let url = "http://localhost:55707/api/home/avaliacao";
+                console.log(this.not)
+                console.log(parseInt(this.not))
                 const response = await this.$http.post(url, {
-                  nota: this.nomeGp,
+                  nota: parseInt(this.not),
                   comentario: this.coment});
-                alert("Amigo adicionado com sucesso!")
+                alert("Obrigado por avaliar nosso site!")
               }catch (erro) {
               console.log(erro);
               alert(erro.body);
             }
-        }
-    }*/
+        },
+        async getAvaliacoes(){       
+            try{
+                let url = "http://localhost:55707/api/home/getAvaliacoes";
+                const response = await this.$http.get(url)
+                this.avaliacoe = response.data;
+                this.avaliacoe.forEach(avaliacao => {
+                    notas.add(avaliacao.nota);
+                });
+                var elem = 0;
+                var soma = 0;
+                var media = 5;
+                while(notas[i]!=null){
+                    soma=notas[i];
+                    i++;
+                }
+                media= soma/elem;
+                document.getElementById("mda").innerHTML +=media
+                console.log("chegou");
+                console.log(notas[1]);
+            }   
+            catch(erro){console.log(erro)}
+        },
+    },
+    beforeMount(){
+        this.getAvaliacoes();
+    }
 }
 </script>
 <style>
@@ -95,16 +130,22 @@ body{
     font-family: 'Roboto', sans-serif;
     font-size: 15px;
 }
+#mda{
+    position: absolute;
+    margin-top: 465px;
+    left: 795px;
+    font-size: 23px;
+}
 .reclamacoes textarea{
     resize: none;
     position: absolute;
-    margin-top: 480px;
-    left: 810px;
+    margin-top: 500px;
+    left: 795px;
 }
 .reclamacoes button{
     position: absolute;
-    left: 1028px;
-    margin-top: 535px;
+    left: 1013px;
+    margin-top: 555px;
     width: 60px;
     height: 30px;
     border-radius:5px;

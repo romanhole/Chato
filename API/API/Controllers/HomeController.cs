@@ -37,6 +37,16 @@ namespace API.Controllers
       catch (Exception e) { return NotFound(e.Message); }
     }
 
+    [HttpGet("api/home/getAvaliacoes")]
+    public ActionResult<List<Avaliacao>> GetAllAvaliacoes()
+    {
+      try
+      {
+        return Ok(_context.Avaliacao.ToList());
+      }
+      catch (Exception e) {return NotFound(e.Message+" chegou"); }
+    }
+
     [HttpGet("{idUsuario}")]
     public ActionResult<List<UsuarioConversa>> GetAllUsuarioConversa(int idUsuario)
     {
@@ -174,6 +184,18 @@ namespace API.Controllers
           return NotFound("Email ou senha incorretos");
 
         return Ok(userDb);
+      }
+      catch (Exception e) { return NotFound(e.Message); }
+    }
+
+    [HttpPost("/api/home/avaliacao")]
+    public ActionResult postAvaliacao([FromBody] Avaliacao model)
+    {
+      try
+      {
+        _context.Avaliacao.Add(model);
+        _context.SaveChanges();
+        return Ok(model);
       }
       catch (Exception e) { return NotFound(e.Message); }
     }
