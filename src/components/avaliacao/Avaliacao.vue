@@ -1,58 +1,69 @@
 <template>
-    <div>
-        <a href="javascript:void(0)" onclick="Avaliar(1)">
-        <img src="img/star0.png" id="s1"></a>
-
-        <a href="javascript:void(0)" onclick="Avaliar(2)">
-        <img src="img/star0.png" id="s2"></a>
-
-        <a href="javascript:void(0)" onclick="Avaliar(3)">
-        <img src="img/star0.png" id="s3"></a>
-
-        <a href="javascript:void(0)" onclick="Avaliar(4)">
-        <img src="img/star0.png" id="s4"></a>
-
-        <a href="javascript:void(0)" onclick="Avaliar(5)">
-        <img src="img/star0.png" id="s5"></a>
-        <p id="rating">0</p>
-        <input type="text" placeholder="Deixe nos um comentario!">
+    <div class="avaliacao">
+        <input type="radio" id="star1"><label for="star1"></label>
+        <input type="radio" id="star2"><label for="star2"></label>
+        <input type="radio" id="star3"><label for="star3"></label>
+        <input type="radio" id="star4"><label for="star4"></label>
+        <input type="radio" id="star5"><label for="star5"></label>
     </div>
 </template>
 <script>
-export default {
+export default{
 
 }
-/*function Avaliar(estrela) {
- var url = window.location;
- url = url.toString()
- url = url.split("index.html");
- url = url[0];
-
- var s1 = document.getElementById("s1").src;
- var s2 = document.getElementById("s2").src;
- var s3 = document.getElementById("s3").src;
- var s4 = document.getElementById("s4").src;
- var s5 = document.getElementById("s5").src;
-
-if(estrela >= 1){
-    document.getElementById("s1").src = "img/star1.png";
-    if(estrela >= 2){
-        document.getElementById("s2").src = "img/star1.png";
-        if(estrela >= 3){
-            document.getElementById("s3").src = "img/star1.png";
-            if(estrela >= 4){
-                document.getElementById("s4").src = "img/star1.png";
-                if(estrela == 5){
-                    document.getElementById("s5").src = "img/star1.png";
-                }
-            }
-        }
-    }
-}
- 
- document.getElementById('rating').innerHTML = estrela;
- 
-}*/
 </script>
-<style scoped>
+<style>
+@import url(https://use.fontawesome.com/releases/v5.5.0/css/all.css);
+body{
+    padding: 0;
+    margin: 0;
+    background: #34495e;
+}
+
+.avaliacao{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotateY(180deg);
+    display: flex;
+}
+
+.avaliacao label{
+    display: block;
+    cursor: pointer;
+    width: 60px;
+    padding-left: 10px;
+}
+
+.avaliacao label::before{
+    content: '\f005';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: relative;
+    display: block;
+    font-size: 50px;
+    color: #1d1c1d;
+}
+.avaliacao label::after{
+    content: '\f005';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 50px;
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    display: block;
+    color: #1f9cff;
+    transition: 0.5s;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+.avaliacao input{
+    display: none;
+}
+
+.avaliacao label:hover::after, 
+.avaliacao label:hover ~ label::after,
+.avaliacao input:checked ~ label::after{
+    opacity: 1;
+}
 </style>
