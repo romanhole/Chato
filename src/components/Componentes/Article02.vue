@@ -10,7 +10,7 @@
                     <h1 v-if="message.grupo">{{ message.Nome }}</h1>
                     <p>{{ message.Mensagem }}</p>
                 </div>-->
-                <div class="recebida" v-for="msg in messages">
+                <div class="recebida" v-for="(msg, index) in messages" :key="index">
                     <h1>{{msg.nomeUsuario}}</h1>
                     <div>
                         <p>{{msg.Mensagem}}</p>

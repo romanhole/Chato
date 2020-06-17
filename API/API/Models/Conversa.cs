@@ -8,5 +8,7 @@ namespace API.Models
         [Key]
         public int idConversa { get; set; }
         public string nomeConversa { get; set; }
+
+        public int isGrupo { get; set; }
     }
 }

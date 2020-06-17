@@ -17,11 +17,12 @@ export default new Vuex.Store({
      idConversa: null
    },
    open: false,
+   nomeGp: null,
  },
  getters: {
     getOpen(state){
       return state.open;
-    }
+    }, 
  },
  mutations: {
    alterarId(state, payload){
@@ -72,6 +73,6 @@ export default new Vuex.Store({
   },
   alterarImagem(context, payload){
     let self = this;
-  }
+  },
  }
 });

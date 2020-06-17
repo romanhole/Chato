@@ -66,10 +66,10 @@
             </div>
           </div>
           <div>
-              <input type="text" placeholder="Nome do grupo">
+              <input type="text" placeholder="Nome do grupo" v-model="nomeGp">
           </div>
           <div>
-              <button><font-awesome-icon :icon="['fas', 'check']" /></button>
+              <button @click="criarGp"><font-awesome-icon :icon="['fas', 'check']" /></button>
           </div>
       </div>
       <div class="item article-01">
@@ -85,7 +85,7 @@
                   <input type="text" id="procurar" placeholder="Procurar por conversas">
               </div>
               <div class="left-03">
-                  <div class="amigos" @click="conversaSelecionada(c.idConversa)" :class="{ 'selecionado': selecionado }" v-for="c in conversas">
+                  <div class="amigos" @click="conversaSelecionada(c.idConversa)" :class="{ 'selecionado': selecionado }" v-for="(c, index) in conversas" :key="index">
                       <img src="https://web.whatsapp.com/pp?e=https%3A%2F%2Fpps.whatsapp.net%2Fv%2Ft61.24694-24%2F75518813_135672844467532_4825498981546307180_n.jpg%3Foe%3D5EDEBAE7%26oh%3D7d719f1952dc7d8b1ecc1b71bea6c04c&t=l&u=5519987277158-1583320513%40g.us&i=1583320610&n=wKIscaInsu%2FhaxUDSCy%2FIX%2Fx7uoIm3SX6Pw0xlkvBkA%3D"/>
                       <div>
                           <p>{{c.nomeConversa}}</p>
@@ -99,13 +99,14 @@
 </template>
 
 <script>
-
+import store from '../../store'
 export default {
     mounted(){
 
     },
     data(){
         return{
+            nomeGp: "",
             selecionado: false,
             abaPerfil: false,
             abaGrupo: false,
@@ -210,6 +211,18 @@ export default {
               alert(erro.body);
             }
           }else{alert("ID vazio!")}
+        },
+        async criarGp(){
+            try{
+                let url = "http://localhost:55707/api/home/conversa";
+                const response = await this.$http.post(url, {
+                  nomeConversa: this.nomeGp,
+                  isGrupo: 1});
+                alert("Amigo adicionado com sucesso!")
+              }catch (erro) {
+              console.log(erro);
+              alert(erro.body);
+              }
         }
     },
     name: 'Article01'

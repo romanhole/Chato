@@ -115,6 +115,20 @@ namespace API.Controllers
       }catch (Exception e) { return NotFound(e.Message); }
     }
 
+    [HttpPost ("/api/home/conversa")]
+    public ActionResult postConversa([FromBody] Conversa model)
+    {
+      try
+      {
+        if(model.isGrupo <0||model.isGrupo>1)
+          return NotFound("definidor de grupo invalido");
+        _context.Conversa.Add(model);
+        _context.SaveChanges();
+        return Ok(model);
+      }
+      catch(Exception e) { return NotFound(e.Message); }
+    }
+
 
     [HttpPost]
     public ActionResult postConversaMensagem([FromBody]ConversaMensagem model)

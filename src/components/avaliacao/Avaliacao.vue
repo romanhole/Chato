@@ -22,7 +22,7 @@
 export default {
 
 }
-function Avaliar(estrela) {
+/*function Avaliar(estrela) {
  var url = window.location;
  url = url.toString()
  url = url.split("index.html");
@@ -52,7 +52,7 @@ if(estrela >= 1){
  
  document.getElementById('rating').innerHTML = estrela;
  
-}
+}*/
 </script>
 <style scoped>
 </style>

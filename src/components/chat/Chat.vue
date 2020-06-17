@@ -30,7 +30,9 @@ export default {
           alert(erro.body);
       }
   },
-  data() {},
+  data() {
+    return{};
+  },
   components: {
     Article01,
     Article02,
